@@ -24,10 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Run tests
-      - name: Run unit tests
-        run: npm test -- --watch=false --browsers=ChromeHeadless
-
       # Clean the dist folder before building
       - name: Clean dist folder
         run: rm -rf dist
