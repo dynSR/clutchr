@@ -37,7 +37,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.8.0
         with:
           branch: gh-pages # Target branch for GitHub Pages
-          folder: dist/cdl-tracker/browser # Folder with the built Angular app
+          folder: dist/clutchr/browser # Folder with the built Angular app
           clean: true
           commit-message: "Deploy Angular app via GitHub Actions"
           token: ${{ secrets.DEPLOY_TOKEN }} # Use the GitHub token for authentication
