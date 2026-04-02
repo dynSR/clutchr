@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-map-details',
   imports: [],
   templateUrl: './map-details.html',
-  styleUrl: './map-details.css',
+  styleUrl: './map-details.scss',
 })
 export class MapDetails {}

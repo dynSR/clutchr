@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.season-events-header {
+  min-height: var(--default-content-header-height);
+}
+
+.season-events-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+}

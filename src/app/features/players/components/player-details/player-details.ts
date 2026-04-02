@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-player-details',
   imports: [],
   templateUrl: './player-details.html',
-  styleUrl: './player-details.css',
+  styleUrl: './player-details.scss',
 })
 export class PlayerDetails {}

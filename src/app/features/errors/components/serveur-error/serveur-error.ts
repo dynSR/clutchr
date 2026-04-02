@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-serveur-error',
   imports: [],
   templateUrl: './serveur-error.html',
-  styleUrl: './serveur-error.css',
+  styleUrl: './serveur-error.scss',
 })
 export class ServeurError {}

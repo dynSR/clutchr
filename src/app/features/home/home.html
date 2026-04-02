@@ -1,13 +1,18 @@
-<!-- Page's Header -->
-<app-navbar/>
-
 <!-- Page's Body -->
 <!-- Page's Body - Left Side — Scoreboard + season events -->
-<app-team-scoreboard/>
-<app-season-events/>
+<aside class="left-column">
+  <season-info-banner/>
+  <team-scoreboard/>
+  <season-events/>
+</aside>
+
 
 <!-- Page's Body - Center — News -->
-<app-news/>
+<main class="main-column">
+  <news/>
+</main>
 
 <!-- Page's Body - Right Side — Incoming matches -->
-<app-incoming-matches/>
+<aside class="right-column">
+  <incoming-matches/>
+</aside>

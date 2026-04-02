@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-matches-list',
   imports: [],
   templateUrl: './matches-list.html',
-  styleUrl: './matches-list.css',
+  styleUrl: './matches-list.scss',
 })
 export class MatchesList {}

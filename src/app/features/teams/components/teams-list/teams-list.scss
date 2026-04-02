@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.team-list-header {
+  flex-basis: min-content;
+}
+
+.team-list-group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 24px;
+  overflow-y: scroll;
+}
+
+.team-list-row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  min-height: 100%;
+  flex: 1;
+}

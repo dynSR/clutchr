@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { TeamScoreboardRow } from './components/team-scoreboard-row/team-scoreboard-row';
 
 @Component({
-  selector: 'app-team-scoreboard',
-  imports: [],
+  selector: 'team-scoreboard',
+  imports: [TeamScoreboardRow],
   templateUrl: './team-scoreboard.html',
-  styleUrl: './team-scoreboard.css',
+  styleUrl: './team-scoreboard.scss',
 })
 export class TeamScoreboard {}

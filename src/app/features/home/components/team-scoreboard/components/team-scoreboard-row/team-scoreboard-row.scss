@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: clamp(24px, 32px, 40px);
+  background: var(--default-background-color);
+}
+
+.team-rank,
+.team-season-points {
+  min-width: var(--default-content-min-width);
+  text-align: center;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}

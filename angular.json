@@ -37,7 +37,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -57,7 +57,7 @@
                 "output": "/assets/"
               }
             ],
-            "styles": ["src/styles.css", "src/styles/reset.css"]
+            "styles": ["src/styles/reset.scss", "src/styles.scss"]
           },
           "configurations": {
             "production": {

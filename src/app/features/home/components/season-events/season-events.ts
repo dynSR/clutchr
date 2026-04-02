@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { SeasonEventsRow } from './components/season-events-row/season-events-row';
 
 @Component({
-  selector: 'app-season-events',
-  imports: [],
+  selector: 'season-events',
+  imports: [SeasonEventsRow],
   templateUrl: './season-events.html',
-  styleUrl: './season-events.css',
+  styleUrl: './season-events.scss',
 })
 export class SeasonEvents {}

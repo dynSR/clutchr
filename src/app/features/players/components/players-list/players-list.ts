@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-players-list',
   imports: [],
   templateUrl: './players-list.html',
-  styleUrl: './players-list.css',
+  styleUrl: './players-list.scss',
 })
 export class PlayersList {}
