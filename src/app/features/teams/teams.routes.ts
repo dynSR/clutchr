@@ -3,7 +3,11 @@
 export const teamsRoutes: Routes = [
   {
     path: 'teams',
-    pathMatch: 'full',
     loadComponent: () => import('./components/teams-list/teams-list').then((m) => m.TeamsList),
+  },
+  {
+    path: 'teams/:id/roster',
+    pathMatch: 'full',
+    loadComponent: () => import('./components/team-roster/team-roster').then((m) => m.TeamRoster),
   },
 ];

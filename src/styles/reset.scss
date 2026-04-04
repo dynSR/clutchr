@@ -82,3 +82,8 @@ p {
   text-align: start;
   text-wrap: pretty;
 }
+
+ul, menu {
+  list-style-type: none;
+  padding: 0;
+}

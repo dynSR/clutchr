@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { PlayerCard } from './components/player-card/player-card';
 
 @Component({
-  selector: 'app-team-details',
-  imports: [],
-  templateUrl: './team-details.html',
-  styleUrl: './team-details.scss',
+  selector: 'team-roster',
+  imports: [NgOptimizedImage, PlayerCard],
+  templateUrl: './team-roster.html',
+  styleUrl: './team-roster.scss',
 })
-export class TeamDetails {}
+export class TeamRoster {}

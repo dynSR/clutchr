@@ -1,6 +1,8 @@
 :root {
   --default-content-width: 98dvw;
   --default-background-color: rgba(15, 15, 15, 0.5);
+  --background-color: #DBDBDB;
+  --default-background-gradient: linear-gradient(90deg, rgba(219, 219, 219, 1) 0%, rgba(0, 14, 14, 1) 100%);
   --default-content-header-height: 40px;
   --default-content-min-width: 40px;
   --default-text-color: #FFFFFF;
@@ -20,6 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: var(--font-family-text), serif;
+  width: 100dvw;
   height: 100dvh;
   overflow: hidden;
 }
@@ -57,8 +60,9 @@ body > header:last-child {
 }
 
 body > app-root {
-  padding: 20px;
+  padding: 32px;
   margin: auto;
+  width: 100%;
   height: 100%;
 }
 
