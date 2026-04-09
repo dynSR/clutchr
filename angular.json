@@ -57,7 +57,7 @@
                 "output": "/assets/"
               }
             ],
-            "styles": ["src/styles/reset.scss", "src/styles.scss"]
+            "styles": ["src/tailwind.css", "src/styles/reset.scss", "src/styles.scss"]
           },
           "configurations": {
             "production": {
