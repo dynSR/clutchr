@@ -1,0 +1,8 @@
+@use "tailwindcss";
+
+@config "../tailwind.config.ts";
+@import "tailwindcss/preflight.css";
+@tailwind utilities;
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
