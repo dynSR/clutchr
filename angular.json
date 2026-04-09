@@ -10,7 +10,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
+          "style": "css",
           "skipTests": true
         },
         "@schematics/angular:class": {
@@ -57,7 +57,7 @@
                 "output": "/assets/"
               }
             ],
-            "styles": ["src/tailwind.css", "src/styles/reset.scss", "src/styles.scss"]
+            "styles": ["src/tailwind.css", "src/styles/reset.css", "src/styles.css"]
           },
           "configurations": {
             "production": {
