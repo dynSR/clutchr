@@ -1,13 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {AppHeaderComponent} from './shared/components/app-header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AppHeaderComponent],
   template: `
+    <app-header/>
     <router-outlet />
   `
 })
 export class App {
-  protected readonly title = signal('clutchr');
 }

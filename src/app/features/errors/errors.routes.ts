@@ -4,13 +4,13 @@ export const errorsRoutes: Routes = [
   {
     path: 'error-404',
     pathMatch: 'full',
-    loadComponent: () => import('./components/not-found/not-found').then((m) => m.NotFound),
+    loadComponent: () => import('./components/not-found.component').then((m) => m.NotFoundComponent),
   },
   {
     path: 'error-500',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./components/serveur-error/serveur-error').then((m) => m.ServeurError),
+      import('./components/serveur-error.component').then((m) => m.ServeurErrorComponent),
   },
   {
     path: '**',

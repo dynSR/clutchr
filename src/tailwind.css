@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+
+@layer utilities {
+  .overflow-inherit {
+    overflow: inherit;
+  }
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  .overflow-initial {
+    overflow: initial;
+  }
+}
