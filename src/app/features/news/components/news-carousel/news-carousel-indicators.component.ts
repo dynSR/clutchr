@@ -1,5 +1,7 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   DestroyRef,
   ElementRef,
@@ -28,14 +30,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'news-carousel-indicators',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <button
-      #indicator
+    <button #indicator
       type="button"
-      class="w-3 h-3 rounded cursor-pointer font-extrabold"
+      class="flex items-center relative w-4 h-4 rounded cursor-pointer font-extrabold"
       (click)="onClick(index)"
     >
-      @defer (hydrate on interaction) {
+      @defer (hydrate on immediate) {
         @if (isIndicatedElementShown) {
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -75,14 +77,15 @@ export class NewsCarouselIndicators implements AfterViewInit {
   readonly destroyRef: DestroyRef;
   protected isIndicatedElementShown!: boolean;
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     this.destroyRef = inject(DestroyRef);
   }
 
   ngAfterViewInit() {
-    this.onCarouselSlideEvent
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((sliderIndex) => (this.isIndicatedElementShown = this.index === sliderIndex));
+    this.onCarouselSlideEvent.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((sliderIndex) => {
+      this.isIndicatedElementShown = this.index === sliderIndex;
+      if (this.isIndicatedElementShown) this.cdr.markForCheck();
+    });
   }
 
   protected onClick(eventIndex: number): void {

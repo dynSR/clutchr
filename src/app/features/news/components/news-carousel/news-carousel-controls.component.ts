@@ -14,7 +14,7 @@ import { UIPosition } from '../../../../shared/enums/UIPosition';
         class="inline-flex items-center justify-center w-10 h-10 rounded group-focus:ring-4 group-focus:outline-none"
       >
         <svg
-          class="w-5 h-5 text-white"
+          class="w-5 h-5 text-white group-hover:shadow-xl"
           [class.rotate-180]="this.position === UIPosition.Right"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ import { UIPosition } from '../../../../shared/enums/UIPosition';
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
+            stroke-width="4"
             d="m15 19-7-7 7-7"
           />
         </svg>
@@ -36,7 +36,7 @@ import { UIPosition } from '../../../../shared/enums/UIPosition';
     </button>
   `,
   host: {
-    class: 'group absolute top-0 h-full z-30 hover:bg-primary-50/20 rounded',
+    class: 'group absolute top-0 h-full z-30 hover:bg-primary-50/50 rounded',
   },
 })
 export class NewsCarouselControls {
