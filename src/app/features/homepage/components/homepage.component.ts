@@ -1,13 +1,21 @@
 import {Component} from '@angular/core';
-import {TeamScoreboardComponent} from '../teams/components/scoreboard/team-scoreboard.component';
-import {SeasonBannerComponent} from '../../shared/components/season-banner.component';
-import { MajorEventsTimelineComponent } from '../major-events/components/major-events-timeline/major-events-timeline.component';
-import { NewsListComponent } from '../news/components/news-list/news-list.component';
-import { NewsCarouselComponent } from '../news/components/news-carousel/news-carousel.component';
+import {TeamScoreboardComponent} from '../../teams/components/scoreboard/team-scoreboard.component';
+import {SeasonBannerComponent} from './season-banner.component';
+import { MajorEventsTimelineComponent } from '../../major-events/components/major-events-timeline/major-events-timeline.component';
+import { NewsListComponent } from '../../news/components/news-list/news-list.component';
+import { NewsCarouselComponent } from '../../news/components/news-carousel/news-carousel.component';
+import { ScheduleComponent } from '../../matches/components/schedule/schedule.component';
 
 @Component({
   selector: 'homepage',
-  imports: [TeamScoreboardComponent, SeasonBannerComponent, MajorEventsTimelineComponent, NewsListComponent, NewsCarouselComponent],
+  imports: [
+    TeamScoreboardComponent,
+    SeasonBannerComponent,
+    MajorEventsTimelineComponent,
+    NewsListComponent,
+    NewsCarouselComponent,
+    ScheduleComponent,
+  ],
   template: `
     <aside class="flex flex-col flex-1 h-fit gap-lg">
       <season-banner />
@@ -21,7 +29,7 @@ import { NewsCarouselComponent } from '../news/components/news-carousel/news-car
     </section>
 
     <aside class="flex flex-col flex-1 h-fit">
-      <team-scoreboard />
+      <schedule />
     </aside>
   `,
   host: {

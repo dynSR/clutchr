@@ -10,14 +10,16 @@ import { MajorEventsService } from '../../major-events.service';
     <header class="h-[40px]">
       <h5 class="uppercase">{{ title }}</h5>
     </header>
-    <article class="flex flex-col gap-xs">
+    <ul class="flex flex-col gap-xs">
       @for (majorEvent of majorEvents; track majorEvent.id) {
-        <major-events-timeline-item [majorEvent]="majorEvent" />
+        <li>
+          <major-events-timeline-item [majorEvent]="majorEvent" />
+        </li>
         @if ($index < majorEvents.length - 1) {
           <hr>
         }
       }
-    </article>
+    </ul>
   `,
 })
 export class MajorEventsTimelineComponent implements OnInit {

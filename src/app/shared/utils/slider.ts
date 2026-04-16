@@ -34,7 +34,7 @@ export namespace SliderModule {
   }
 
   export class Slider<T extends ElementRef> {
-    readonly onItemSlide = new BehaviorSubject<number>(0);
+    readonly onItemSlide$ = new BehaviorSubject<number>(0);
     private readonly range!: CircularRange;
     private readonly items: Array<T>;
 
@@ -48,7 +48,11 @@ export namespace SliderModule {
       this.showCurrent();
     }
 
-    get currentPosition(): string {
+    get currentPosition(): number {
+      return this.range.current;
+    }
+
+    get rangePosition(): string {
       return this.range.toString();
     }
 
@@ -70,9 +74,8 @@ export namespace SliderModule {
     }
 
     private showItemAt(index: number): void {
-      this.hideAllItems();
       this.showItem(this.items.at(index));
-      this.onItemSlide.next(index);
+      this.onItemSlide$.next(index);
     }
 
     private showItem(item: ElementRef<HTMLElement> | undefined): void {

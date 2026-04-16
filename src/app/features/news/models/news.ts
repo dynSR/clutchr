@@ -1,25 +1,32 @@
 ﻿import { BaseModel } from '../../../shared/utils/base-model';
-import { NewsId } from '../../../shared/types/branded-types';
+import { NewsId } from '../../../shared/types/brandedTypes';
 import { IWith } from '../../../shared/utils/base-builder';
+import { Metadata } from '../../../shared/models/metadata';
+import '../../../shared/extensions/string.extensions';
 
 export enum NewsType {
   /**
-   * Used for all kind of updates: roster, cdl rules.
+   * Used for all website updates.
    */
-  Update,
+  Update= 'update',
+
+  /**
+   * Used for all website updates.
+   */
+  RosterUpdate= 'roster update',
 
   /**
    * Used for incoming matches or events/tournaments to promote.
    */
-  Schedule,
+  Schedule = 'schedule',
 
   /**
    * Used for any match results to promote.
    */
-  Results,
+  Results = 'results',
 }
 
-interface INews {
+interface NewsProps {
   id: NewsId;
   type: NewsType;
   title: string;
@@ -29,9 +36,10 @@ interface INews {
   illustrationSrc: string;
   publisher: string;
   publishedOn: Date;
+  metadata: Metadata;
 }
 
-export class News extends BaseModel<News> implements INews {
+export class News extends BaseModel<News> implements NewsProps {
   readonly id: NewsId;
   readonly type: NewsType;
   readonly title: string;
@@ -41,21 +49,27 @@ export class News extends BaseModel<News> implements INews {
   readonly illustrationSrc: string;
   readonly publisher: string;
   readonly publishedOn: Date;
+  readonly metadata: Metadata;
 
-  constructor(data: INews) {
+  constructor(props: NewsProps) {
     super();
-    this.id = data.id;
-    this.type = data.type;
-    this.title = data.title;
-    this.subtitle = data.subtitle;
-    this.content = data.content;
-    this.summary = data.summary;
-    this.illustrationSrc = data.illustrationSrc;
-    this.publisher = data.publisher;
-    this.publishedOn = data.publishedOn;
+    this.id = props.id;
+    this.type = props.type;
+    this.title = props.title;
+    this.subtitle = props.subtitle;
+    this.content = props.content;
+    this.summary = props.summary;
+    this.illustrationSrc = props.illustrationSrc;
+    this.publisher = props.publisher;
+    this.publishedOn = props.publishedOn;
+    this.metadata = props.metadata;
   }
 
-  protected initBuilder(builder: IWith<News, {}>): News {
+  getFullTitle(): string {
+    return this.title + (this.subtitle !== undefined ? ' — ' + this.subtitle : String.Empty);
+  }
+
+  protected initBuilder(builder: IWith<News>): News {
     let b = builder
       .with('id', this.id)
       .with('type', this.type)
@@ -64,7 +78,8 @@ export class News extends BaseModel<News> implements INews {
       .with('summary', this.summary)
       .with('illustrationSrc', this.illustrationSrc)
       .with('publisher', this.publisher)
-      .with('publishedOn', this.publishedOn);
+      .with('publishedOn', this.publishedOn)
+      .with('metadata', this.metadata);
 
     if (this.subtitle) {
       b = b.with('subtitle', this.subtitle);

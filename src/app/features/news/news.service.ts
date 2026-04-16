@@ -6,11 +6,11 @@ import { News } from './models/news';
 export class NewsService {
   private readonly news: Array<News> = newsData;
 
-  getNews(): Array<News> {
-    return this.news.sort((a, b) => a.publishedOn.getTime() - b.publishedOn.getTime());
+  getNewsWithLimit(limit: number) {
+    return this.getNews().slice(0, limit);
   }
 
-  getLatestNews() {
-    return this.getNews().slice(0, 5);
+  getNews(): Array<News> {
+    return this.news.sort((a, b) => b.publishedOn.getTime() - a.publishedOn.getTime());
   }
 }

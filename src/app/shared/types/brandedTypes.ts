@@ -9,6 +9,7 @@ export type PlayerRoleId = Brand<string, 'PlayerRoleId'>;
 export type PlayerPositionId = Brand<string, 'PlayerRoleId'>;
 export type MajorEventId = Brand<string, 'MajorEventId'>;
 export type NewsId = Brand<string, 'NewsId'>;
+export type MatchId = Brand<string, 'MatchId'>;
 
 export function createId<K extends string, T extends string>(id: K, typeName: T): Brand<K, T> {
   if (!id.trim()) throw new Error(`${typeName} cannot be empty`);

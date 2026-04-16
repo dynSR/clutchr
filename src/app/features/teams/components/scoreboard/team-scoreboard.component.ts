@@ -9,21 +9,31 @@ import { Team } from '../../models/team';
   template: `
     <header class="flex flex-row items-center justify-between h-[40px]">
       <h5 class="uppercase">{{ title }}</h5>
-      <section role="group" aria-label="Team Scoreboard Filters" class="flex flex-row items-center gap-2">
-        <button type="button">⏹</button>
-        <button type="button">⏹</button>
-        <button type="button">⏹</button>
-        <button type="button">⏹</button>
-      </section>
+      <ul role="group" aria-label="Team Scoreboard Filters" class="flex flex-row items-center gap-2">
+        <li>
+          <button type="button">⏹</button>
+        </li>
+        <li>
+          <button type="button">⏹</button>
+        </li>
+        <li>
+          <button type="button">⏹</button>
+        </li>
+        <li>
+          <button type="button">⏹</button>
+        </li>
+      </ul>
     </header>
-    <article class="flex flex-col gap-xs">
+    <ul class="flex flex-col gap-xs">
       @for (team of teams; track team.id) {
-        <team-scoreboard-item [team]="team" />
+        <li>
+          <team-scoreboard-item [team]="team" />
+        </li>
         @if ($index < teams.length - 1) {
           <hr />
         }
       }
-    </article>
+    </ul>
   `,
   host: {
     class: 'flex flex-col gap-xs'

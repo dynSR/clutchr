@@ -9,6 +9,6 @@ export const homePageRoutes: Routes = [
   {
     path: 'home',
     pathMatch: 'full',
-    loadComponent: () => import('./homepage.component').then((m) => m.HomepageComponent)
+    loadComponent: () => import('./components/homepage.component').then((m) => m.HomepageComponent)
   }
 ];

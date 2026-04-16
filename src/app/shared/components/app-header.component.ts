@@ -10,7 +10,10 @@ import { AppLogoComponent } from './app-logo.component';
   `,
   host: {
     class:
-      'flex flex-row justify-between items-center header-height p-sm bg-neutral-900 border-b border-primary-50/20 sticky top-0 z-10',
+      'flex flex-row justify-between items-center ' +
+      'sticky top-0 header-height z-header ' +
+      'p-sm bg-neutral-950 border-b border-primary-50/20 ' +
+      'shadow-2xl',
   },
 })
 export class AppHeaderComponent {}

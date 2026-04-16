@@ -1,52 +1,70 @@
 ﻿import { EventEmitter } from '@angular/core';
 
-/**
- * No need to handle pause state for the moment, it starts, runs and restart on current value reaching max value.
- * If it is looping it keeps doing so until the element using it is destroyed.
- * states:
- * - Idle
- * - Running
- * states management:
- * - start
- * - tick-update
- * - stop
- * properties:
- * - current: 0
- * - max: tbd (positive)
- * - isLooping: false
- * - onTimerStart
- * - onTimerStop
- */
-
-export class Interval {
+export class Timer {
   onTimerStarted = new EventEmitter<void>();
+  onTimerStopped = new EventEmitter<void>();
 
+  private currentValue: number = 0;
   private readonly isLooping: boolean;
   private isRunning: boolean = false;
-  private current: number = 0;
-  private readonly max: number;
+  private readonly maxValue: number;
 
-  constructor(max: number, isLooping: boolean) {
-    this.max = max;
+  private interval?: ReturnType<typeof setInterval>;
+
+  constructor(maxValue: number, isLooping: boolean) {
+    this.maxValue = maxValue;
     this.isLooping = isLooping;
+
+    this.setInterval();
+    this.start();
   }
 
-  start(): void {
-    this.isRunning = true;
+  get progress() {
+    return (this.currentValue / this.maxValue) * 100;
   }
 
   tick(): void {
     if (!this.isRunning) return;
-    this.current++;
 
-    if (this.isLooping && this.hasReachedMaxValue()) this.current = 0;
+    this.currentValue++;
+    // console.log(`${this.currentValue} / ${this.maxValue} | progress: ${this.progress}`);
+
+    if (this.hasReachedMaxValue()) {
+      this.stop();
+      if (this.isLooping) this.reset();
+    }
   }
 
-  stop(): void {
+  reset(): void {
+    this.currentValue = 0;
+    this.resetInterval();
+    this.start();
+  }
+
+  start(): void {
+    this.isRunning = true;
+    this.onTimerStarted.emit();
+  }
+
+  clear(): void {
+    clearInterval(this.interval);
+  }
+
+  private stop(): void {
     this.isRunning = false;
+    this.onTimerStopped.emit();
+  }
+
+  private resetInterval(): void {
+    this.clear();
+    this.setInterval();
+  }
+
+  private setInterval(): void {
+    this.interval = setInterval(() => this.tick(), 1000);
   }
 
   private hasReachedMaxValue(): boolean {
-    return this.current >= this.max;
+    return this.currentValue >= this.maxValue;
   }
 }

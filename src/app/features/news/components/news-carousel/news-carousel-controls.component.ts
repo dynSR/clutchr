@@ -7,11 +7,12 @@ import { UIPosition } from '../../../../shared/enums/UIPosition';
   template: `
     <button
       type="button"
-      class="flex items-center justify-center h-full px-4 cursor-pointer group-focus:outline-none"
+      class="flex items-center justify-center cursor-pointer h-full group-focus:outline-none"
       (click)="onClick()"
     >
+      <!-- Chevron icon -->
       <span
-        class="inline-flex items-center justify-center w-10 h-10 rounded group-focus:ring-4 group-focus:outline-none"
+        class="inline-flex items-center justify-center size-[2rem] rounded group-focus:ring-4 group-focus:outline-none"
       >
         <svg
           class="w-5 h-5 text-white group-hover:shadow-xl"
@@ -36,10 +37,10 @@ import { UIPosition } from '../../../../shared/enums/UIPosition';
     </button>
   `,
   host: {
-    class: 'group absolute top-0 h-full z-30 hover:bg-primary-50/50 rounded',
+    class: 'group absolute top-0 h-full z-10 rounded bg-neutral-900/5 hover:bg-primary-50/25',
   },
 })
-export class NewsCarouselControls {
+export class NewsCarouselControlsComponent {
   @Input({ required: true }) position: UIPosition = UIPosition.Left;
   @Output() clickAction = new EventEmitter<void>();
   protected readonly UIPosition = UIPosition;

@@ -69,7 +69,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     </button>
   `,
 })
-export class NewsCarouselIndicators implements AfterViewInit {
+export class NewsCarouselIndicatorsComponent implements AfterViewInit {
   @Input({ required: true }) index: number = 0;
   @Input({ required: true }) onCarouselSlideEvent!: Observable<number>;
   @Output() clickAction = new EventEmitter<number>();

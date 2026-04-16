@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {homePageRoutes} from './features/homepage/homePageRoutes';
+import {homePageRoutes} from './features/homepage/homePage.routes';
 import {errorsRoutes} from './features/errors/errors.routes';
 
 export const routes: Routes = [

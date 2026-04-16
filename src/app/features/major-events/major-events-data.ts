@@ -1,6 +1,7 @@
 ﻿import { MajorEvent } from './models/major-event';
-import { createId } from '../../shared/types/branded-types';
+import { createId } from '../../shared/types/brandedTypes';
 import { TeamName } from '../teams/enums/team-name';
+import { Metadata } from '../../shared/models/metadata';
 
 export const majorEventsData: Array<MajorEvent> = [
   MajorEvent.create({
@@ -11,6 +12,10 @@ export const majorEventsData: Array<MajorEvent> = [
     location: 'Paris',
     startingOn: new Date(),
     endingOn: new Date(),
+    metadata: Metadata.create({
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }),
   }),
   MajorEvent.create({
     id: createId(crypto.randomUUID(), 'MajorEventId'),
@@ -20,5 +25,9 @@ export const majorEventsData: Array<MajorEvent> = [
     location: 'Paris',
     startingOn: new Date(),
     endingOn: new Date(),
+    metadata: Metadata.create({
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }),
   }),
 ];

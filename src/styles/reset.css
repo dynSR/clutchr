@@ -72,14 +72,6 @@ button {
   padding: 0;
 }
 
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 p {
   text-align: start;
   text-wrap: pretty;
