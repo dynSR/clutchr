@@ -1,5 +1,5 @@
 ﻿import { MajorEvent } from './models/major-event';
-import { createId } from '../../shared/types/brandedTypes';
+import { createId } from '../../shared/types/branded-types';
 import { TeamName } from '../teams/enums/team-name';
 import { Metadata } from '../../shared/models/metadata';
 

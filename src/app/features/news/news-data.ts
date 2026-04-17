@@ -1,5 +1,5 @@
 ﻿import { News, NewsType } from './models/news';
-import { createId } from '../../shared/types/brandedTypes';
+import { createId } from '../../shared/types/branded-types';
 import { Metadata } from '../../shared/models/metadata';
 
 export const newsData: Array<News> = [

@@ -6,6 +6,20 @@ import { AppLogoComponent } from './app-logo.component';
   imports: [AppLogoComponent],
   template: `
     <app-logo class="h-full" />
+    <nav aria-label="Main Navigation">
+      <ul class="flex gap-md">
+        <li>
+          <a href="/teams">
+            {{ 'Teams' }}
+          </a>
+        </li>
+        <li>
+          <a href="/players">
+            {{ 'Players' }}
+          </a>
+        </li>
+      </ul>
+    </nav>
     <p>app-header works</p>
   `,
   host: {

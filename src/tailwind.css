@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 
 @layer utilities {
+
+  /* Overflow - Start */
   .overflow-inherit {
     overflow: inherit;
   }
@@ -13,10 +15,14 @@
     overflow: initial;
   }
 
+  /* Overflow - End */
+  /* Snap - Start */
   .snap-x-mandatory {
     scroll-snap-type: x mandatory;
   }
 
+  /* Snap - Start */
+  /* Pulsating FX - Start */
   .pulsating-circle,
   .circle {
     display: inline-block;
@@ -71,12 +77,15 @@
       opacity: 0;
     }
   }
-
+  /* Pulsating FX - End */
+  /* Interactive element - Start */
   .interactive:hover {
     cursor: pointer;
     background-color: var(--interactive-element-bg-color);
   }
 
+  /* Interactive element - End */
+  /* Badge - Start */
   .badge,
   .badge-outline {
     display: inline-block;
@@ -90,6 +99,7 @@
     background-color: magenta;
     max-height: fit-content;
     text-transform: uppercase;
+    user-select: none;
   }
 
   .badge-outline {
@@ -97,6 +107,8 @@
     border: solid 1px;
   }
 
+  /* Badge - End */
+  /* Layout z - Start */
   .z-back {
     z-index: var(--layout-background) !important;
   }
@@ -113,11 +125,14 @@
     z-index: var(--layout-header) !important;
   }
 
+  /* Layout z - End */
+  /* Text - Start */
   .underline {
     text-decoration-line: underline !important;
   }
 
-  /* Link */
+  /* Text z - End */
+  /* Link - Start */
   .link:not(:disabled) {
     color: var(--color-primary-50) !important;
   }
@@ -130,4 +145,6 @@
   .link:hover:not(:disabled) > * {
     color: var(--color-primary-50);
   }
+
+  /* Link - End */
 }

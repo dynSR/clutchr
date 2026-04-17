@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
         <small class="numeric">
           {{ match.date | date: 'short' }}
         </small>
-        <span [class]="match.isLive ?
+        <span [class]="match.isLive() ?
               'pulsating-circle bg-green-300 before:bg-green-300/20' :
               'circle bg-red-500'"
         ></span>

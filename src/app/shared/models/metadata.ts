@@ -16,7 +16,7 @@ export class Metadata extends BaseModel<Metadata> implements MetaDataProps {
     this.updatedAt = props.updatedAt;
   }
 
-  protected override initBuilder(builder: IWith<Metadata, {}>): Metadata {
+  protected override initBuilder(builder: IWith<Metadata>): Metadata {
     let b = builder.with('createdAt', this.createdAt).with('updatedAt', this.updatedAt);
     return new Metadata(b.build());
   }

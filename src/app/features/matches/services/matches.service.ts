@@ -9,14 +9,19 @@ export class MatchesService {
   getIncomingMatches(): Array<Match> {
     if (this.matches.length === 0) return [];
 
-    const now = Date.now();
-    const closestMatch = this.matches.reduce((prev, curr) => {
-      const prevDiff = Math.abs(now - prev.date.getTime());
-      const currDiff = Math.abs(now - curr.date.getTime());
-      return currDiff < prevDiff ? curr : prev;
-    });
+    const matchDurationMs = 90 * 60 * 1000;
+    const now = new Date();
+    const upcoming = this.matches.filter(
+      (m) => m.date.getTime() >= now.getTime() - matchDurationMs,
+    );
+    if (upcoming.length === 0) return [];
+
+    const closestMatch = upcoming.reduce((prev, curr) =>
+      curr.date.getTime() < prev.date.getTime() ? curr : prev,
+    );
+
     const targetDay = closestMatch.date.getDay();
-    return this.matches
+    return upcoming
       .filter((m) => m.date.getDay() === targetDay)
       .sort((a, b) => a.date.getTime() - b.date.getTime());
   }

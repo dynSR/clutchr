@@ -32,5 +32,6 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit() {
     this.matches = this.matchService.getIncomingMatches();
+    console.log(this.matches);
   }
 }

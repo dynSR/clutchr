@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LinkFlavourTextEnum } from '../../../shared/enums/link-flavour-text.enum';
 
 @Component({
   selector: 'season-banner',
@@ -6,9 +7,14 @@ import { Component } from '@angular/core';
   template: `
     <img src="{{ 'assets/Logo_Placeholder.png' }}" alt="CDL Logo" class="size-[60px]" />
 
-    <section class="leading-[1]">
-      <h5>CDL MAJOR X</h5>
-      <span class="numeric text-sm"> MAR 28 - MAY 11</span>
+    <section class="flex flex-col leading-[1]">
+      <h4>{{ 'Major name' }}</h4>
+      <small class="numeric text-sm">{{ 'Major period' }}</small>
+      <a href="" class="underline">
+        <small>
+          {{ LinkFlavourTextEnum.MoreInfo }}
+        </small>
+      </a>
     </section>
   `,
   host: {
@@ -22,4 +28,5 @@ export class SeasonBannerComponent {
    * - Grab the Major name
    * - Grab the Major period -> start to end dates
    */
+  protected readonly LinkFlavourTextEnum = LinkFlavourTextEnum;
 }

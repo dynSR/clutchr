@@ -1,16 +1,16 @@
-﻿import { TeamId } from '../../../shared/types/brandedTypes';
+﻿import { TeamId } from '../../../shared/types/branded-types';
 import { TeamName } from '../enums/team-name';
 import { BaseModel } from '../../../shared/utils/base-model';
 import { IWith } from '../../../shared/utils/base-builder';
 import { Metadata } from '../../../shared/models/metadata';
+import { BaseModelProps } from '../../../shared/interfaces/base-model-props';
+import '../../../shared/extensions/string.extensions';
 
-interface TeamProps {
-  id: TeamId;
+interface TeamProps extends BaseModelProps<TeamId> {
   name: TeamName;
   logoSrc: string;
   ladderPosition: number;
   cdlPoints: number;
-  metadata: Metadata;
 }
 
 export class Team extends BaseModel<Team> implements TeamProps {
@@ -31,9 +31,14 @@ export class Team extends BaseModel<Team> implements TeamProps {
     this.metadata = props.metadata;
   }
 
+  get slug(): string {
+    return this.name.toKebabLowerCase();
+  }
+
   protected override initBuilder(builder: IWith<Team>): Team {
     let b = builder
       .with('id', this.id)
+      .with('slug', this.slug)
       .with('name', this.name)
       .with('logoSrc', this.logoSrc)
       .with('ladderPosition', this.ladderPosition)

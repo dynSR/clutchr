@@ -1,7 +1,7 @@
-﻿import { MajorEventId } from '../../../shared/types/brandedTypes';
-import { IWith } from '../../../shared/utils/base-builder';
+﻿import { MajorEventId } from '../../../shared/types/branded-types';
 import { BaseModel } from '../../../shared/utils/base-model';
 import { Metadata } from '../../../shared/models/metadata';
+import { IWith } from '../../../shared/utils/base-builder';
 
 interface MajorEventProps {
   id: MajorEventId;

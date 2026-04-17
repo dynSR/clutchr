@@ -219,6 +219,7 @@ hr {
 }
 
 a:hover:not(:disabled) {
+  color: var(--color-primary-50);
   text-decoration-thickness: var(--spacing-xs);
   text-decoration-color: var(--color-primary-50);
 }

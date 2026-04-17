@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { UIPosition } from '../../../../shared/enums/UIPosition';
+import { UiPositionEnum } from '../../../../shared/enums/ui-position.enum';
 
 @Component({
   selector: 'news-carousel-controls',
@@ -41,13 +41,13 @@ import { UIPosition } from '../../../../shared/enums/UIPosition';
   },
 })
 export class NewsCarouselControlsComponent {
-  @Input({ required: true }) position: UIPosition = UIPosition.Left;
+  @Input({ required: true }) position: UiPositionEnum = UiPositionEnum.Left;
   @Output() clickAction = new EventEmitter<void>();
-  protected readonly UIPosition = UIPosition;
+  protected readonly UIPosition = UiPositionEnum;
 
   @HostBinding('class')
   get isLeft() {
-    return this.position === UIPosition.Left ? 'start-0' : 'end-0';
+    return this.position === UiPositionEnum.Left ? 'start-0' : 'end-0';
   }
 
   onClick() {

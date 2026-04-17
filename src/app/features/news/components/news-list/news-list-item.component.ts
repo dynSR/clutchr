@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { News } from '../../models/news';
+import { LinkFlavourTextEnum } from '../../../../shared/enums/link-flavour-text.enum';
 
 @Component({
   selector: 'news-list-item',
@@ -11,7 +12,7 @@ import { News } from '../../models/news';
       <section role="group" class="flex justify-between items-start gap-xs w-full">
         <section role="group" class="flex flex-col">
           <small class="numeric">{{ news.publishedOn | date: 'fullDate' }}</small>
-          <a href="" class="link underline">
+          <a href="" class="underline">
             {{ news.publisher }}
           </a>
         </section>
@@ -35,9 +36,9 @@ import { News } from '../../models/news';
 
     <!-- Link to news details -->
     <a href="{{ 'news/' + news.id }}"
-      class="link underline"
+       class="link underline"
     >
-      {{ 'Read whole news' }}
+      {{ LinkFlavourTextEnum.ReadMore }}
     </a>
   `,
   host: {
@@ -46,4 +47,5 @@ import { News } from '../../models/news';
 })
 export class NewsListItemComponent {
   @Input({ required: true }) news!: News;
+  protected readonly LinkFlavourTextEnum = LinkFlavourTextEnum;
 }

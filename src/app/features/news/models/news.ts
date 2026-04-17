@@ -1,5 +1,5 @@
 ﻿import { BaseModel } from '../../../shared/utils/base-model';
-import { NewsId } from '../../../shared/types/brandedTypes';
+import { NewsId } from '../../../shared/types/branded-types';
 import { IWith } from '../../../shared/utils/base-builder';
 import { Metadata } from '../../../shared/models/metadata';
 import '../../../shared/extensions/string.extensions';
@@ -8,12 +8,12 @@ export enum NewsType {
   /**
    * Used for all website updates.
    */
-  Update= 'update',
+  Update = 'update',
 
   /**
    * Used for all website updates.
    */
-  RosterUpdate= 'roster update',
+  RosterUpdate = 'roster update',
 
   /**
    * Used for incoming matches or events/tournaments to promote.
