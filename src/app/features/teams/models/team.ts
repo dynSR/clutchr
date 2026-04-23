@@ -1,50 +1,67 @@
 ﻿import { TeamId } from '../../../shared/types/branded-types';
-import { TeamName } from '../enums/team-name';
-import { BaseModel } from '../../../shared/utils/base-model';
-import { IWith } from '../../../shared/utils/base-builder';
+import { Organization } from '../../../shared/enums/organization.enum';
 import { Metadata } from '../../../shared/models/metadata';
-import { BaseModelProps } from '../../../shared/interfaces/base-model-props';
-import '../../../shared/extensions/string.extensions';
+import { DefaultProps } from '../../../shared/interfaces/default-props';
+import { City } from '../../../shared/enums/city.enum';
+import { Color } from '../../../shared/utils/color';
 
-interface TeamProps extends BaseModelProps<TeamId> {
-  name: TeamName;
-  logoSrc: string;
-  ladderPosition: number;
-  cdlPoints: number;
+interface TeamColors {
+  primary: Color;
+  secondary?: Color;
 }
 
-export class Team extends BaseModel<Team> implements TeamProps {
+interface TeamProps extends DefaultProps<TeamId> {
+  organization: Organization;
+  city: City;
+  acronym: string;
+  logoSrc: string;
+  cdlPoints: number;
+  colors: TeamColors;
+}
+
+export class Team implements TeamProps {
   readonly id: TeamId;
-  readonly name: TeamName;
-  readonly logoSrc: string;
-  readonly ladderPosition: number;
+  readonly city: City;
+  readonly organization: Organization;
   readonly cdlPoints: number;
+  readonly colors: TeamColors;
   readonly metadata: Metadata;
 
-  constructor(props: TeamProps) {
-    super();
+  constructor(props: Omit<TeamProps, 'acronym' | 'logoSrc' | 'slug'>) {
     this.id = props.id;
-    this.name = props.name;
-    this.logoSrc = props.logoSrc;
-    this.ladderPosition = props.ladderPosition;
+    this.city = props.city;
+    this.organization = props.organization;
     this.cdlPoints = props.cdlPoints;
+    this.colors = props.colors;
     this.metadata = props.metadata;
+  }
+
+  get acronym(): string {
+    if (this.organization.equals(Organization.Cloud9)) return 'NY';
+    if (this.organization.equals(Organization.Falcons)) return 'RYD';
+    if (this.organization.equals(Organization.Faze)) return 'VGS';
+    if (this.organization.equals(Organization.Optic)) return 'TX';
+    return this.city.slice(0, 3).toUpperCase();
+  }
+
+  get name(): string {
+    const teamName = this.isCityAndOrganizationReversedInName()
+      ? this.organization + String.WhiteSpace + this.city
+      : this.city + String.WhiteSpace + this.organization;
+    return teamName.allCapitalized();
   }
 
   get slug(): string {
     return this.name.toKebabLowerCase();
   }
 
-  protected override initBuilder(builder: IWith<Team>): Team {
-    let b = builder
-      .with('id', this.id)
-      .with('slug', this.slug)
-      .with('name', this.name)
-      .with('logoSrc', this.logoSrc)
-      .with('ladderPosition', this.ladderPosition)
-      .with('cdlPoints', this.cdlPoints)
-      .with('metadata', this.metadata);
+  get logoSrc(): string {
+    return 'assets/2026-season/teams-logo/' + this.name.toKebabPascalCase() + '.png';
+  }
 
-    return new Team(b.build());
+  isCityAndOrganizationReversedInName(): boolean {
+    return [Organization.Cloud9, Organization.Faze, Organization.G2, Organization.Optic].includes(
+      this.organization,
+    );
   }
 }

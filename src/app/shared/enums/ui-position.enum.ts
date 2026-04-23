@@ -1,4 +1,4 @@
-﻿export enum UiPositionEnum {
+﻿export enum UIPosition {
   TopLeft,
   Left,
   BottomLeft,

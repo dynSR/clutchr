@@ -27,7 +27,7 @@ import { Team } from '../../models/team';
     <ul class="flex flex-col gap-xs">
       @for (team of teams; track team.id) {
         <li>
-          <team-scoreboard-item [team]="team" />
+          <team-scoreboard-item [team]="team" [position]="$index" />
         </li>
         @if ($index < teams.length - 1) {
           <hr />

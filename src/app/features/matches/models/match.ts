@@ -1,26 +1,22 @@
-﻿import { BaseModel } from '../../../shared/utils/base-model';
-import { Metadata } from '../../../shared/models/metadata';
+﻿import { Metadata } from '../../../shared/models/metadata';
 import { Team } from '../../teams/models/team';
 import { MatchId } from '../../../shared/types/branded-types';
-import { BaseModelProps } from '../../../shared/interfaces/base-model-props';
-import '../../../shared/extensions/array.extensions';
-import { IWith } from '../../../shared/utils/base-builder';
+import { DefaultProps } from '../../../shared/interfaces/default-props';
 
-interface MatchProps extends BaseModelProps<MatchId> {
+interface MatchProps extends DefaultProps<MatchId> {
   teams: FixedSizeArray<Team, 2>;
   score: FixedSizeArray<number, 2>;
   date: Date;
 }
 
-export class Match extends BaseModel<Match> implements MatchProps {
+export class Match implements MatchProps {
   readonly id: MatchId;
   readonly teams: FixedSizeArray<Team, 2>;
   readonly score: FixedSizeArray<number, 2>;
   readonly date: Date;
   readonly metadata: Metadata;
 
-  constructor(props: MatchProps) {
-    super();
+  constructor(props: Omit<MatchProps, 'slug'>) {
     this.id = props.id;
     this.teams = props.teams;
     this.score = props.score;
@@ -41,17 +37,5 @@ export class Match extends BaseModel<Match> implements MatchProps {
     const matchEnd = matchStart + matchDurationMs;
 
     return matchStart <= now && now <= matchEnd;
-  }
-
-  protected initBuilder(builder: IWith<Match>): Match {
-    const b = builder
-      .with('id', this.id)
-      .with('slug', this.slug)
-      .with('teams', this.teams)
-      .with('score', this.score)
-      .with('date', this.date)
-      .with('metadata', this.metadata);
-
-    return new Match(b.build());
   }
 }

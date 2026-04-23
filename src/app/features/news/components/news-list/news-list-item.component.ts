@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { News } from '../../models/news';
-import { LinkFlavourTextEnum } from '../../../../shared/enums/link-flavour-text.enum';
+import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum';
 
 @Component({
   selector: 'news-list-item',
@@ -9,10 +9,10 @@ import { LinkFlavourTextEnum } from '../../../../shared/enums/link-flavour-text.
   template: `
     <header class="flex flex-col gap-md w-full">
       <!-- News Publication info -->
-      <section role="group" class="flex justify-between items-start gap-xs w-full">
+      <section role="group" class="flex justify-between items-center gap-xs w-full">
         <section role="group" class="flex flex-col">
           <small class="numeric">{{ news.publishedOn | date: 'fullDate' }}</small>
-          <a href="" class="underline">
+          <a href="" class="underline pointer-events-auto">
             {{ news.publisher }}
           </a>
         </section>
@@ -35,17 +35,17 @@ import { LinkFlavourTextEnum } from '../../../../shared/enums/link-flavour-text.
     </section>
 
     <!-- Link to news details -->
-    <a href="{{ 'news/' + news.id }}"
-       class="link underline"
-    >
+    <a href="{{ 'news/' + news.id }}" class="link underline pointer-events-auto">
       {{ LinkFlavourTextEnum.ReadMore }}
     </a>
   `,
   host: {
-    class: 'flex flex-col gap-md rounded p-sm bg-neutral-900/5',
+    class:
+      'flex flex-col gap-md rounded p-md bg-neutral-900/20 pointer-events-none ' +
+      'hover:bg-primary-50/10',
   },
 })
 export class NewsListItemComponent {
   @Input({ required: true }) news!: News;
-  protected readonly LinkFlavourTextEnum = LinkFlavourTextEnum;
+  protected readonly LinkFlavourTextEnum = LinkFlavourText;
 }

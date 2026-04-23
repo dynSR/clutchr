@@ -1,71 +1,65 @@
 ﻿import { Match } from './models/match';
 import { Metadata } from '../../shared/models/metadata';
 import { teamsData } from '../teams/teams-data';
-import { createId } from '../../shared/types/branded-types';
+import { createId, MatchId } from '../../shared/types/branded-types';
 
 export const matchesData: Array<Match> = [
-  Match.create({
-    id: createId(crypto.randomUUID(), 'MatchId'),
-    slug: teamsData[0].slug + teamsData[1].slug,
+  new Match({
+    id: createId<MatchId>(),
     teams: [teamsData[0], teamsData[1]],
     score: [0, 0],
     date: new Date(),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  Match.create({
-    id: createId(crypto.randomUUID(), 'MatchId'),
-    slug: teamsData[0].slug + teamsData[1].slug,
+  new Match({
+    id: createId<MatchId>(),
     teams: [teamsData[0], teamsData[1]],
     score: [0, 0],
     date: new Date(),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  Match.create({
-    id: createId(crypto.randomUUID(), 'MatchId'),
-    slug: teamsData[0].slug + teamsData[1].slug,
+  new Match({
+    id: createId<MatchId>(),
     teams: [teamsData[0], teamsData[1]],
     score: [0, 0],
     date: new Date(),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  Match.create({
-    id: createId(crypto.randomUUID(), 'MatchId'),
-    slug: teamsData[0].slug + teamsData[1].slug,
+  new Match({
+    id: createId<MatchId>(),
     teams: [teamsData[0], teamsData[1]],
     score: [0, 0],
     date: new Date(),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  Match.create({
-    id: createId(crypto.randomUUID(), 'MatchId'),
-    slug: teamsData[0].slug + teamsData[1].slug,
+  new Match({
+    id: createId<MatchId>(),
     teams: [teamsData[0], teamsData[1]],
     score: [0, 0],
     date: new Date(),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  Match.create({
-    id: createId(crypto.randomUUID(), 'MatchId'),
-    slug: teamsData[0].slug + teamsData[1].slug,
+  new Match({
+    id: createId<MatchId>(),
     teams: [teamsData[0], teamsData[1]],
     score: [3, 2],
-    date: new Date(),
-    metadata: Metadata.create({
+    date: new Date(2026, 3, 14, 20, 30),
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),

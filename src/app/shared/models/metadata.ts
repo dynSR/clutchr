@@ -1,23 +1,14 @@
-﻿import { BaseModel } from '../utils/base-model';
-import { IWith } from '../utils/base-builder';
-
-interface MetaDataProps {
+﻿interface MetadataProps {
   createdAt: Date;
   updatedAt: Date;
 }
 
-export class Metadata extends BaseModel<Metadata> implements MetaDataProps {
+export class Metadata implements MetadataProps {
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
-  constructor(props: MetaDataProps) {
-    super();
+  constructor(props: MetadataProps) {
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
-  }
-
-  protected override initBuilder(builder: IWith<Metadata>): Metadata {
-    let b = builder.with('createdAt', this.createdAt).with('updatedAt', this.updatedAt);
-    return new Metadata(b.build());
   }
 }

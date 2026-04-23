@@ -1,8 +1,6 @@
-﻿import { BaseModel } from '../../../shared/utils/base-model';
-import { NewsId } from '../../../shared/types/branded-types';
-import { IWith } from '../../../shared/utils/base-builder';
+﻿import { NewsId } from '../../../shared/types/branded-types';
 import { Metadata } from '../../../shared/models/metadata';
-import '../../../shared/extensions/string.extensions';
+import { DefaultProps } from '../../../shared/interfaces/default-props';
 
 export enum NewsType {
   /**
@@ -26,8 +24,7 @@ export enum NewsType {
   Results = 'results',
 }
 
-interface NewsProps {
-  id: NewsId;
+interface NewsProps extends DefaultProps<NewsId> {
   type: NewsType;
   title: string;
   subtitle?: string;
@@ -36,10 +33,9 @@ interface NewsProps {
   illustrationSrc: string;
   publisher: string;
   publishedOn: Date;
-  metadata: Metadata;
 }
 
-export class News extends BaseModel<News> implements NewsProps {
+export class News implements NewsProps {
   readonly id: NewsId;
   readonly type: NewsType;
   readonly title: string;
@@ -51,8 +47,7 @@ export class News extends BaseModel<News> implements NewsProps {
   readonly publishedOn: Date;
   readonly metadata: Metadata;
 
-  constructor(props: NewsProps) {
-    super();
+  constructor(props: Omit<NewsProps, 'slug'>) {
     this.id = props.id;
     this.type = props.type;
     this.title = props.title;
@@ -65,26 +60,11 @@ export class News extends BaseModel<News> implements NewsProps {
     this.metadata = props.metadata;
   }
 
-  getFullTitle(): string {
-    return this.title + (this.subtitle !== undefined ? ' — ' + this.subtitle : String.Empty);
+  get slug(): string {
+    return (this.type + this.title).toKebabLowerCase();
   }
 
-  protected initBuilder(builder: IWith<News>): News {
-    let b = builder
-      .with('id', this.id)
-      .with('type', this.type)
-      .with('title', this.title)
-      .with('content', this.content)
-      .with('summary', this.summary)
-      .with('illustrationSrc', this.illustrationSrc)
-      .with('publisher', this.publisher)
-      .with('publishedOn', this.publishedOn)
-      .with('metadata', this.metadata);
-
-    if (this.subtitle) {
-      b = b.with('subtitle', this.subtitle);
-    }
-
-    return new News(b.build());
+  getFullTitle(): string {
+    return this.title + (this.subtitle !== undefined ? ' — ' + this.subtitle : String.Empty);
   }
 }

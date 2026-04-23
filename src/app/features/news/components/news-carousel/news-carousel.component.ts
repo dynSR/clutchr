@@ -16,7 +16,7 @@ import { NewsService } from '../../news.service';
 import { SliderModule } from '../../../../shared/utils/slider';
 import { NewsCarouselControlsComponent } from './news-carousel-controls.component';
 import { NewsCarouselIndicatorsComponent } from './news-carousel-indicators.component';
-import { UiPositionEnum } from '../../../../shared/enums/ui-position.enum';
+import { UIPosition } from '../../../../shared/enums/ui-position.enum';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Timer } from '../../../../shared/utils/timer';
 import Slider = SliderModule.Slider;
@@ -80,7 +80,7 @@ export class NewsCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
   >;
   protected latestNews: Array<News> = Array.of();
   protected slider!: Slider<ElementRef<HTMLElement>>;
-  protected readonly UIPosition = UiPositionEnum;
+  protected readonly UIPosition = UIPosition;
   protected readonly timer: Timer;
   protected readonly slideDelayInSeconds: number = 5;
   private readonly newsService = new NewsService();

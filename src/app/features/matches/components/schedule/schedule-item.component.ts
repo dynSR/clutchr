@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Match } from '../../models/match';
 import { DatePipe } from '@angular/common';
+import { TeamLogoNameComponent } from '../../../../shared/components/team-logo-name.component';
+import { Spacings } from '../../../../shared/enums/spacings.enum';
 
 @Component({
   selector: 'schedule-item',
-  imports: [DatePipe],
+  imports: [DatePipe, TeamLogoNameComponent],
   template: `
     <a href="{{ 'matches/' + match.id }}"
        class="flex flex-col gap-sm interactive p-sm rounded relative"
@@ -22,10 +24,7 @@ import { DatePipe } from '@angular/common';
       <section role="group" class="flex flex-col items-start">
         @for (team of match.teams; track team.id) {
           <section role="group" class="flex flex-row justify-between w-full">
-            <section role="group" class="flex flex-row gap-sm">
-              <img src="{{ team.logoSrc }}" alt="{{ team.name + ' Logo' }}" class="size-[24px]" />
-              <p>{{ team.name }}</p>
-            </section>
+            <team-logo-name [team]="team" [teamIconSize]="24" [gapBetweenTeamIconAndName]="Spacings.SM" />
             <p class="numeric">{{ match.score[$index] }}</p>
           </section>
         }
@@ -35,4 +34,5 @@ import { DatePipe } from '@angular/common';
 })
 export class ScheduleItemComponent {
   @Input({ required: true }) match!: Match;
+  protected readonly Spacings = Spacings;
 }

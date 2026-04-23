@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LinkFlavourTextEnum } from '../../../shared/enums/link-flavour-text.enum';
+import { LinkFlavourText } from '../../../shared/enums/link-flavour-text.enum';
 
 @Component({
   selector: 'season-banner',
@@ -28,5 +28,5 @@ export class SeasonBannerComponent {
    * - Grab the Major name
    * - Grab the Major period -> start to end dates
    */
-  protected readonly LinkFlavourTextEnum = LinkFlavourTextEnum;
+  protected readonly LinkFlavourTextEnum = LinkFlavourText;
 }

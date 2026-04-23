@@ -1,89 +1,90 @@
 ﻿import { News, NewsType } from './models/news';
-import { createId } from '../../shared/types/branded-types';
+import { createId, NewsId } from '../../shared/types/branded-types';
 import { Metadata } from '../../shared/models/metadata';
+import { ASSETS_PLACEHOLDER_LOGO_IMG, assets } from '../../shared/utils/assets-finder';
 
 export const newsData: Array<News> = [
-  News.create({
-    id: createId(crypto.randomUUID(), 'NewsId'),
+  new News({
+    id: createId<NewsId>(),
     type: NewsType.RosterUpdate,
     title: 'News Title',
     content: 'News Content',
     summary: 'News Summary',
-    illustrationSrc: 'assets/2026-season/players/BB-Nastie.png',
+    illustrationSrc: assets('2026-season/players/BB-Nastie'),
     publisher: '@' + 'Publisher',
     publishedOn: new Date(),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  News.create({
-    id: createId(crypto.randomUUID(), 'NewsId'),
+  new News({
+    id: createId<NewsId>(),
     type: NewsType.Update,
     title: 'BIG NEWS',
     subtitle: 'This News Title big big news',
     content: 'News Content',
     summary: 'News Summary',
-    illustrationSrc: 'assets/2026-season/players/FV-Abuzah.png',
+    illustrationSrc: assets('2026-season/players/FV-Abuzah'),
     publisher: '@' + 'Publisher',
     publishedOn: new Date(2026, 3, 15, 15, 30),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  News.create({
-    id: createId(crypto.randomUUID(), 'NewsId'),
+  new News({
+    id: createId<NewsId>(),
     type: NewsType.Schedule,
     title: 'News Title',
     content: 'News Content',
     summary: 'News Summary',
-    illustrationSrc: 'assets/2026-season/players/PGM-Sib.png',
+    illustrationSrc: assets('2026-season/players/PGM-Sib'),
     publisher: '@' + 'Publisher',
     publishedOn: new Date(2026, 2, 15, 15, 30),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  News.create({
-    id: createId(crypto.randomUUID(), 'NewsId'),
+  new News({
+    id: createId<NewsId>(),
     type: NewsType.Schedule,
     title: 'News Title',
     content: 'News Content',
     summary: 'News Summary',
-    illustrationSrc: 'assets/2026-season/players/PGM-Envoy.png',
+    illustrationSrc: assets('2026-season/players/PGM-Envoy'),
     publisher: '@' + 'Publisher',
     publishedOn: new Date(2026, 3, 15, 17, 1),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  News.create({
-    id: createId(crypto.randomUUID(), 'NewsId'),
+  new News({
+    id: createId<NewsId>(),
     type: NewsType.Results,
     title: 'News Title',
     content: 'News Content',
     summary: 'News Summary',
-    illustrationSrc: 'assets/2026-season/players/PGM-Neptune.png',
+    illustrationSrc: assets('2026-season/players/PGM-Neptune'),
     publisher: '@' + 'Publisher',
     publishedOn: new Date('2025-08-02'),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  News.create({
-    id: createId(crypto.randomUUID(), 'NewsId'),
+  new News({
+    id: createId<NewsId>(),
     type: NewsType.Results,
     title: 'News Title',
     content: 'News Content',
     summary: 'News Summary',
-    illustrationSrc: 'assets/Logo_Placeholder.png',
+    illustrationSrc: ASSETS_PLACEHOLDER_LOGO_IMG,
     publisher: '@' + 'Publisher',
     publishedOn: new Date('2023-07-05'),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),

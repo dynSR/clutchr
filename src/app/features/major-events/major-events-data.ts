@@ -1,31 +1,32 @@
 ﻿import { MajorEvent } from './models/major-event';
-import { createId } from '../../shared/types/branded-types';
-import { TeamName } from '../teams/enums/team-name';
+import { createId, MajorEventId } from '../../shared/types/branded-types';
+import { Organization } from '../../shared/enums/organization.enum';
 import { Metadata } from '../../shared/models/metadata';
+import { ASSETS_PLACEHOLDER_LOGO_IMG } from '../../shared/utils/assets-finder';
 
 export const majorEventsData: Array<MajorEvent> = [
-  MajorEvent.create({
-    id: createId(crypto.randomUUID(), 'MajorEventId'),
+  new MajorEvent({
+    id: createId<MajorEventId>(),
     name: 'Event Name 01',
-    logoSrc: 'assets/Logo_Placeholder.png',
-    host: TeamName.GentleMates,
+    logoSrc: ASSETS_PLACEHOLDER_LOGO_IMG,
+    host: Organization.GentleMates,
     location: 'Paris',
     startingOn: new Date(),
     endingOn: new Date(),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
   }),
-  MajorEvent.create({
-    id: createId(crypto.randomUUID(), 'MajorEventId'),
+  new MajorEvent({
+    id: createId<MajorEventId>(),
     name: 'Major IV',
-    logoSrc: 'assets/Logo_Placeholder.png',
-    host: TeamName.GentleMates,
+    logoSrc: ASSETS_PLACEHOLDER_LOGO_IMG,
+    host: Organization.GentleMates,
     location: 'Paris',
     startingOn: new Date(),
     endingOn: new Date(),
-    metadata: Metadata.create({
+    metadata: new Metadata({
       createdAt: new Date(),
       updatedAt: new Date(),
     }),

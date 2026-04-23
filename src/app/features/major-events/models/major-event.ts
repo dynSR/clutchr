@@ -1,10 +1,8 @@
 ﻿import { MajorEventId } from '../../../shared/types/branded-types';
-import { BaseModel } from '../../../shared/utils/base-model';
 import { Metadata } from '../../../shared/models/metadata';
-import { IWith } from '../../../shared/utils/base-builder';
+import { DefaultProps } from '../../../shared/interfaces/default-props';
 
-interface MajorEventProps {
-  id: MajorEventId;
+interface MajorEventProps extends DefaultProps<MajorEventId> {
   name: string;
   description?: string;
   logoSrc: string;
@@ -12,10 +10,9 @@ interface MajorEventProps {
   location: string;
   startingOn: Date;
   endingOn: Date;
-  metadata: Metadata;
 }
 
-export class MajorEvent extends BaseModel<MajorEvent> implements MajorEventProps {
+export class MajorEvent implements MajorEventProps {
   readonly id: MajorEventId;
   readonly name: string;
   readonly description?: string;
@@ -26,8 +23,7 @@ export class MajorEvent extends BaseModel<MajorEvent> implements MajorEventProps
   readonly endingOn: Date;
   readonly metadata: Metadata;
 
-  constructor(props: MajorEventProps) {
-    super();
+  constructor(props: Omit<MajorEventProps, 'slug'>) {
     this.id = props.id;
     this.name = props.name;
     this.description = props.description;
@@ -39,25 +35,11 @@ export class MajorEvent extends BaseModel<MajorEvent> implements MajorEventProps
     this.metadata = props.metadata;
   }
 
-  getPeriod(): string {
-    return `${this.startingOn.toLocaleDateString()} - ${this.endingOn.toLocaleDateString()}`;
+  get slug(): string {
+    return (this.name + this.host).toKebabLowerCase();
   }
 
-  protected override initBuilder(builder: IWith<MajorEvent>): MajorEvent {
-    let b = builder
-      .with('id', this.id)
-      .with('name', this.name)
-      .with('logoSrc', this.logoSrc)
-      .with('host', this.host)
-      .with('location', this.location)
-      .with('startingOn', this.startingOn)
-      .with('endingOn', this.endingOn)
-      .with('metadata', this.metadata);
-
-    if (this.description) {
-      b = b.with('description', this.description);
-    }
-
-    return new MajorEvent(b.build());
+  getPeriod(): string {
+    return `${this.startingOn.toLocaleDateString()} - ${this.endingOn.toLocaleDateString()}`;
   }
 }
