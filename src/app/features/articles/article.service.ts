@@ -1,16 +1,16 @@
 ﻿import { Injectable } from '@angular/core';
-import { newsData } from './news-data';
-import { News } from './models/news';
+import { articlesData } from './articles-data';
+import { Article } from './models/article.model';
 
 @Injectable({ providedIn: 'root' })
-export class NewsService {
-  private readonly news: Array<News> = newsData;
+export class ArticleService {
+  private readonly news: Array<Article> = articlesData;
 
   getNewsWithLimit(limit: number) {
     return this.getNews().slice(0, limit);
   }
 
-  getNews(): Array<News> {
+  getNews(): Array<Article> {
     return this.news.sort((a, b) => b.publishedOn.getTime() - a.publishedOn.getTime());
   }
 }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MajorEvent } from '../../models/major-event';
-import { MajorEventTimelineItemComponent } from './major-event-timeline-item.component';
-import { MajorEventsService } from '../../major-events.service';
+import { MajorEvent } from '../../models/major-event.model';
+import { MajorEventsTimelineItemComponent } from './major-events-timeline-item.component';
+import { MajorEventService } from '../../major-event.service';
 
 @Component({
   selector: 'major-events-timeline',
-  imports: [MajorEventTimelineItemComponent],
+  imports: [MajorEventsTimelineItemComponent],
   template: `
     <header class="h-[40px]">
       <h5 class="uppercase">{{ title }}</h5>
@@ -26,7 +26,7 @@ export class MajorEventsTimelineComponent implements OnInit {
   protected readonly title: string = '2026 CDL Events';
   protected majorEvents: Array<MajorEvent> = Array.of();
 
-  private readonly majorEventsService: MajorEventsService = new MajorEventsService();
+  private readonly majorEventsService: MajorEventService = new MajorEventService();
 
   ngOnInit(): void {
     this.majorEvents = this.majorEventsService.getMajorEvents();

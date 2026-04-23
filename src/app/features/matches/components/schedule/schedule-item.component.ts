@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Match } from '../../models/match';
+import { Match } from '../../models/match.model';
 import { DatePipe } from '@angular/common';
 import { TeamLogoNameComponent } from '../../../../shared/components/team-logo-name.component';
 import { Spacings } from '../../../../shared/enums/spacings.enum';
@@ -8,7 +8,7 @@ import { Spacings } from '../../../../shared/enums/spacings.enum';
   selector: 'schedule-item',
   imports: [DatePipe, TeamLogoNameComponent],
   template: `
-    <a href="{{ 'matches/' + match.id }}"
+    <a href="{{ match.linkToDetails }}"
        class="flex flex-col gap-sm interactive p-sm rounded relative"
     >
       <header class="flex flex-row justify-between items-center">

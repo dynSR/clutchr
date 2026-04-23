@@ -1,4 +1,4 @@
-﻿import { Team } from './models/team';
+﻿import { Team } from './models/team.model';
 import { createId, TeamId } from '../../shared/types/branded-types';
 import { Metadata } from '../../shared/models/metadata';
 import { City } from '../../shared/enums/city.enum';

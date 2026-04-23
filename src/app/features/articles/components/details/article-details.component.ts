@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'news-details',
+  selector: 'article-details',
   imports: [],
   template: `
 
   `,
 })
-export class NewsDetailsComponent {}
+export class ArticleDetailsComponent {}

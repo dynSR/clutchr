@@ -1,9 +1,9 @@
 ﻿import { Injectable } from '@angular/core';
 import { matchesData } from '../matches-data';
-import { Match } from '../models/match';
+import { Match } from '../models/match.model';
 
 @Injectable({ providedIn: 'root' })
-export class MatchesService {
+export class MatchService {
   private readonly matches: Array<Match> = matchesData;
 
   getIncomingMatches(): Array<Match> {

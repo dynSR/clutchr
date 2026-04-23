@@ -1,4 +1,4 @@
-﻿import { Match } from './models/match';
+﻿import { Match } from './models/match.model';
 import { Metadata } from '../../shared/models/metadata';
 import { teamsData } from '../teams/teams-data';
 import { createId, MatchId } from '../../shared/types/branded-types';

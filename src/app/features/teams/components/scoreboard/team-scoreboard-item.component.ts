@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Team } from '../../models/team';
+import { Team } from '../../models/team.model';
 import { TeamLogoNameComponent } from '../../../../shared/components/team-logo-name.component';
 import { Spacings } from '../../../../shared/enums/spacings.enum';
 
@@ -8,7 +8,7 @@ import { Spacings } from '../../../../shared/enums/spacings.enum';
   imports: [TeamLogoNameComponent],
   template: `
     <a
-      href="{{ 'teams/' + team.id + '/' + team.slug }}"
+      href="{{ team.linkToDetails }}"
       class="flex flex-row justify-between interactive p-xs rounded"
     >
       <section role="group" class="flex items-center gap-lg">

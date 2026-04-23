@@ -1,8 +1,8 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { UIPosition } from '../../../../shared/enums/ui-position.enum';
+import { UIPosition } from '../../enums/ui-position.enum';
 
 @Component({
-  selector: 'news-carousel-controls',
+  selector: 'carousel-controls',
   imports: [],
   template: `
     <button
@@ -40,7 +40,7 @@ import { UIPosition } from '../../../../shared/enums/ui-position.enum';
     class: 'group absolute top-0 h-full z-10 rounded bg-neutral-900/5 hover:bg-primary-50/25',
   },
 })
-export class NewsCarouselControlsComponent {
+export class CarouselControlsComponent {
   @Input({ required: true }) position: UIPosition = UIPosition.Left;
   @Output() clickAction = new EventEmitter<void>();
   protected readonly UIPosition = UIPosition;

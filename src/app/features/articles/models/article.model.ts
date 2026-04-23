@@ -1,8 +1,10 @@
-﻿import { NewsId } from '../../../shared/types/branded-types';
+﻿import { ArticleId } from '../../../shared/types/branded-types';
 import { Metadata } from '../../../shared/models/metadata';
 import { DefaultProps } from '../../../shared/interfaces/default-props';
+import { CarouselItem } from '../../../shared/components/carousel/CarouselItem';
+import { PropertiesOnly } from '../../../shared/types/properties-only';
 
-export enum NewsType {
+export enum ArticleType {
   /**
    * Used for all website updates.
    */
@@ -24,30 +26,30 @@ export enum NewsType {
   Results = 'results',
 }
 
-interface NewsProps extends DefaultProps<NewsId> {
-  type: NewsType;
+interface ArticleProps extends DefaultProps<ArticleId> {
+  type: ArticleType;
   title: string;
   subtitle?: string;
   content: string;
   summary: string;
   illustrationSrc: string;
-  publisher: string;
+  author: string;
   publishedOn: Date;
 }
 
-export class News implements NewsProps {
-  readonly id: NewsId;
-  readonly type: NewsType;
+export class Article implements ArticleProps, CarouselItem {
+  readonly id: ArticleId;
+  readonly type: ArticleType;
   readonly title: string;
   readonly subtitle?: string;
   readonly content: string;
   readonly summary: string;
   readonly illustrationSrc: string;
-  readonly publisher: string;
+  readonly author: string;
   readonly publishedOn: Date;
   readonly metadata: Metadata;
 
-  constructor(props: Omit<NewsProps, 'slug'>) {
+  constructor(props: Omit<PropertiesOnly<ArticleProps>, 'linkToDetails' | 'slug'>) {
     this.id = props.id;
     this.type = props.type;
     this.title = props.title;
@@ -55,13 +57,21 @@ export class News implements NewsProps {
     this.content = props.content;
     this.summary = props.summary;
     this.illustrationSrc = props.illustrationSrc;
-    this.publisher = props.publisher;
+    this.author = props.author;
     this.publishedOn = props.publishedOn;
     this.metadata = props.metadata;
   }
 
   get slug(): string {
-    return (this.type + this.title).toKebabLowerCase();
+    return (this.type + String.WhiteSpace + this.title + ' by ' + this.author).toKebabLowerCase();
+  }
+
+  get linkToDetails(): string {
+    return `${this.getClassName()}/${this.id}/${this.slug}`;
+  }
+
+  getClassName(): string {
+    return Article.name.withoutFirstChar().toLowerCase() + 's';
   }
 
   getFullTitle(): string {

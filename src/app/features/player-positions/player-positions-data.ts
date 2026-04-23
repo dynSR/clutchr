@@ -1,5 +1,5 @@
 ﻿import { PlayerPositions } from '../../shared/enums/player-positions.enum';
-import { PlayerPosition } from './models/player-position';
+import { PlayerPosition } from './models/player-position.model';
 import { createId, PlayerPositionId } from '../../shared/types/branded-types';
 
 export const playerPositionsData: ReadonlyArray<PlayerPosition> = [

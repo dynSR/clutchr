@@ -7,7 +7,7 @@ export type TeamId = ID;
 export type PlayerId = ID;
 export type PlayerPositionId = ID;
 export type MajorEventId = ID;
-export type NewsId = ID;
+export type ArticleId = ID;
 export type MatchId = ID;
 
 export function createId<B extends string>(): Brand<string, B> {

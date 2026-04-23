@@ -5,24 +5,30 @@ declare global {
     Comma: string;
     Empty: string;
     Hyphen: string;
+    Slash: string;
+    Underscore: string;
     WhiteSpace: string;
   }
 
   interface String {
-    isEmpty(): boolean;
-    isNullOrEmpty(): boolean;
-    equals(other: string): boolean;
     allCapitalized(): string;
     capitalized(): string;
+    equals(other: string): boolean;
+    isEmpty(): boolean;
+    isNullOrEmpty(): boolean;
+    splitOnCaps(): string;
+    withoutFirstChar(): string;
     toKebabCase(): string;
-    toKebabPascalCase(): string;
     toKebabLowerCase(): string;
+    toKebabPascalCase(): string;
   }
 }
 
 String.Comma = ',';
 String.Empty = '';
 String.Hyphen = '-';
+String.Slash = '/';
+String.Underscore = '_';
 String.WhiteSpace = ' ';
 
 String.prototype.isEmpty = function (this: string): boolean {
@@ -61,4 +67,14 @@ String.prototype.toKebabPascalCase = function (this: string): string {
 
 String.prototype.toKebabLowerCase = function (this: string): string {
   return this.replaceAll(String.WhiteSpace, String.Hyphen).toLowerCase();
+};
+
+String.prototype.withoutFirstChar = function (this: string): string {
+  return this.slice(1, this.length);
+};
+
+String.prototype.splitOnCaps = function (this: string): string {
+  return this.split(/(?<![A-Z])(?=[A-Z])/)
+    .toString()
+    .replaceAll(String.Comma, String.WhiteSpace);
 };

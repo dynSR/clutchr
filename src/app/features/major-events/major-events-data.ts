@@ -1,4 +1,4 @@
-﻿import { MajorEvent } from './models/major-event';
+﻿import { MajorEvent } from './models/major-event.model';
 import { createId, MajorEventId } from '../../shared/types/branded-types';
 import { Organization } from '../../shared/enums/organization.enum';
 import { Metadata } from '../../shared/models/metadata';

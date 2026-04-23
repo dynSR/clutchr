@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
-import {TeamScoreboardComponent} from '../../teams/components/scoreboard/team-scoreboard.component';
-import {SeasonBannerComponent} from './season-banner.component';
+import { Component } from '@angular/core';
+import { TeamScoreboardComponent } from '../../teams/components/scoreboard/team-scoreboard.component';
+import { SeasonBannerComponent } from './season-banner.component';
 import { MajorEventsTimelineComponent } from '../../major-events/components/major-events-timeline/major-events-timeline.component';
-import { NewsListComponent } from '../../news/components/news-list/news-list.component';
-import { NewsCarouselComponent } from '../../news/components/news-carousel/news-carousel.component';
+import { ArticleListComponent } from '../../articles/components/list/article-list.component';
 import { ScheduleComponent } from '../../matches/components/schedule/schedule.component';
 
 @Component({
@@ -12,8 +11,7 @@ import { ScheduleComponent } from '../../matches/components/schedule/schedule.co
     TeamScoreboardComponent,
     SeasonBannerComponent,
     MajorEventsTimelineComponent,
-    NewsListComponent,
-    NewsCarouselComponent,
+    ArticleListComponent,
     ScheduleComponent,
   ],
   template: `
@@ -24,8 +22,7 @@ import { ScheduleComponent } from '../../matches/components/schedule/schedule.co
     </aside>
 
     <section class="flex flex-col flex-3 gap-md">
-      <news-carousel />
-      <news-list />
+      <article-list />
     </section>
 
     <aside class="flex flex-col flex-1 h-fit">

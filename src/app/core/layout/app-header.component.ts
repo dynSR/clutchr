@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-import { AppLogoComponent } from './app-logo.component';
 
 @Component({
   selector: 'app-header',
-  imports: [AppLogoComponent],
+  imports: [],
   template: `
-    <app-logo class="h-full" />
+    <a href="/home">
+      <img src="{{ 'assets/Logo_Placeholder.png' }}"
+           alt="ClutchR App Logo"
+           class="size-[64px]"
+      />
+    </a>
+
     <nav aria-label="Main Navigation">
       <ul class="flex gap-md">
         <li>

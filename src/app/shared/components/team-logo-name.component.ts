@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Team } from '../../features/teams/models/team';
+import { Team } from '../../features/teams/models/team.model';
 import { Spacings } from '../enums/spacings.enum';
 import { TextBlockType } from '../enums/text-block-type.enum';
 import { NgOptimizedImage } from '@angular/common';

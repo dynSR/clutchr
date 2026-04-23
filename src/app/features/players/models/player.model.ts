@@ -1,8 +1,9 @@
 ﻿import { DefaultProps } from '../../../shared/interfaces/default-props';
 import { Metadata } from '../../../shared/models/metadata';
 import { PlayerId } from '../../../shared/types/branded-types';
-import { PlayerIdentity } from './player-identity';
-import { PlayerPosition } from '../../player-positions/models/player-position';
+import { PlayerIdentity } from './player-identity.model';
+import { PlayerPosition } from '../../player-positions/models/player-position.model';
+import { PropertiesOnly } from '../../../shared/types/properties-only';
 
 interface PlayerProps extends DefaultProps<PlayerId> {
   tag: string;
@@ -20,7 +21,7 @@ export class Player implements PlayerProps {
   readonly number: string | number;
   readonly metadata: Metadata;
 
-  constructor(props: Omit<PlayerProps, 'iconSrc' | 'slug'>) {
+  constructor(props: Omit<PropertiesOnly<PlayerProps>, 'iconSrc' | 'linkToDetails' | 'slug'>) {
     this.id = props.id;
     this.tag = props.tag;
     this.position = props.position;
@@ -35,5 +36,13 @@ export class Player implements PlayerProps {
 
   get slug(): string {
     return String.Empty;
+  }
+
+  get linkToDetails(): string {
+    return `${this.getClassName()}/${this.id}/${this.slug}`;
+  }
+
+  getClassName(): string {
+    return Player.name.withoutFirstChar().toLowerCase() + 's';
   }
 }

@@ -14,21 +14,8 @@ import {
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-/**
- * TODo:
- * - Ajouter un slide automatique:
- * Au chargement de la page un timer débute.
- * Lorsqu'il est terminé, le slider passe à la slide suivante.
- * Ce processus est infini, tant qu'on est sur la page.
- * Ce qu'il faudrait donc ajouter, c'est une barre représentant l'avancement du timer
- * Il faudrait également, dans un soucis de généralisation du carousel, spécifier si c'est un carousel statique ou animé
- * Les edge cases à prendre en compte dès maintenant sont:
- * - Lorsque le client manipule lui même le slider : qu'il change de slide manuellement, il faut réinitialiser le timer à zéro
- * - Il faut prendre en compte un délai acceptable, après interaction, pour relander de nouveau le timer et le sliding automatique
- */
-
 @Component({
-  selector: 'news-carousel-indicators',
+  selector: 'carousel-indicators',
   imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -69,7 +56,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     </button>
   `,
 })
-export class NewsCarouselIndicatorsComponent implements AfterViewInit {
+export class CarouselIndicatorsComponent implements AfterViewInit {
   @Input({ required: true }) index: number = 0;
   @Input({ required: true }) onCarouselSlideEvent!: Observable<number>;
   @Output() clickAction = new EventEmitter<number>();

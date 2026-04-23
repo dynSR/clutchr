@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
-import { Team } from '../../models/team';
+import { AfterViewInit, Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Team } from '../../models/team.model';
 import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum';
 import { Color } from '../../../../shared/utils/color';
 
@@ -26,7 +26,7 @@ import { Color } from '../../../../shared/utils/color';
     </section>
 
     <footer class="flex flex-col uppercase">
-      <a [href]="rosterLinkRef" class="w-full link underline pointer-events-auto">
+      <a [href]="team.linkToDetails" class="w-full link underline pointer-events-auto">
         {{ LinkFlavorText.ViewTeamRoster }}
       </a>
     </footer>
@@ -38,17 +38,12 @@ import { Color } from '../../../../shared/utils/color';
       'overflow-hidden pointer-events-none hover:bg-primary-50/20',
   },
 })
-export class TeamsListItemComponent implements OnInit, AfterViewInit {
+export class TeamsListItemComponent implements AfterViewInit {
   @Input({ required: true }) team!: Team;
-  protected rosterLinkRef: string = String.Empty;
   protected readonly LinkFlavorText = LinkFlavourText;
   private readonly defaultHostBackgroundColor = new Color(44, 44, 44, 0.2);
 
   constructor(private readonly elementRef: ElementRef) {}
-
-  ngOnInit() {
-    this.rosterLinkRef = `teams/${this.team.id}/${this.team.slug}`;
-  }
 
   ngAfterViewInit() {
     this.elementRef.nativeElement.style.background = this.defaultHostBackgroundColor.toString();

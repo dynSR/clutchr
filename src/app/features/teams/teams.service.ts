@@ -1,4 +1,4 @@
-﻿import { Team } from './models/team';
+﻿import { Team } from './models/team.model';
 import { Injectable } from '@angular/core';
 import { teamsData } from './teams-data';
 import { TeamId } from '../../shared/types/branded-types';

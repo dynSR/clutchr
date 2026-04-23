@@ -1,9 +1,9 @@
 ﻿import { Injectable } from '@angular/core';
-import { MajorEvent } from './models/major-event';
+import { MajorEvent } from './models/major-event.model';
 import { majorEventsData } from './major-events-data';
 
 @Injectable({ providedIn: 'root' })
-export class MajorEventsService {
+export class MajorEventService {
   private readonly majorEvents: Array<MajorEvent> = majorEventsData;
 
   getMajorEvents(): Array<MajorEvent> {

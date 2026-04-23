@@ -35,10 +35,18 @@ export namespace SliderModule {
 
   export class Slider<T extends ElementRef> {
     readonly onItemSlide$ = new BehaviorSubject<number>(0);
-    private readonly range!: CircularRange;
-    private readonly items: Array<T>;
+    private range!: CircularRange;
+    private items: Array<T> = Array.of();
 
-    constructor(items: Array<T>) {
+    get currentPosition(): number {
+      return this.range.current;
+    }
+
+    get rangePosition(): string {
+      return this.items.isNullOrEmpty() ? String.Empty : this.range.toString();
+    }
+
+    init(items: Array<T>): void {
       if (items.length === 0) {
         throw new Error(`${Slider.name} — items array must not be empty`);
       }
@@ -46,14 +54,6 @@ export namespace SliderModule {
       this.items = items;
       this.range = new CircularRange(items.length);
       this.showCurrent();
-    }
-
-    get currentPosition(): number {
-      return this.range.current;
-    }
-
-    get rangePosition(): string {
-      return this.range.toString();
     }
 
     showPrevious(): void {

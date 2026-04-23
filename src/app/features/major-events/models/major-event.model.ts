@@ -1,6 +1,7 @@
 ﻿import { MajorEventId } from '../../../shared/types/branded-types';
 import { Metadata } from '../../../shared/models/metadata';
 import { DefaultProps } from '../../../shared/interfaces/default-props';
+import { PropertiesOnly } from '../../../shared/types/properties-only';
 
 interface MajorEventProps extends DefaultProps<MajorEventId> {
   name: string;
@@ -23,7 +24,7 @@ export class MajorEvent implements MajorEventProps {
   readonly endingOn: Date;
   readonly metadata: Metadata;
 
-  constructor(props: Omit<MajorEventProps, 'slug'>) {
+  constructor(props: Omit<PropertiesOnly<MajorEventProps>, 'linkToDetails' | 'slug'>) {
     this.id = props.id;
     this.name = props.name;
     this.description = props.description;
@@ -36,7 +37,16 @@ export class MajorEvent implements MajorEventProps {
   }
 
   get slug(): string {
-    return (this.name + this.host).toKebabLowerCase();
+    return (this.name + ' hosted by ' + this.host + ' in ' + this.location).toKebabLowerCase();
+  }
+
+  get linkToDetails(): string {
+    console.log(MajorEvent.name);
+    return `${this.getClassName()}/${this.id}/${this.slug}`;
+  }
+
+  getClassName(): string {
+    return MajorEvent.name.withoutFirstChar().splitOnCaps().toString().toKebabLowerCase() + 's';
   }
 
   getPeriod(): string {

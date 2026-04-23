@@ -4,6 +4,7 @@ import { Metadata } from '../../../shared/models/metadata';
 import { DefaultProps } from '../../../shared/interfaces/default-props';
 import { City } from '../../../shared/enums/city.enum';
 import { Color } from '../../../shared/utils/color';
+import { PropertiesOnly } from '../../../shared/types/properties-only';
 
 interface TeamColors {
   primary: Color;
@@ -27,7 +28,9 @@ export class Team implements TeamProps {
   readonly colors: TeamColors;
   readonly metadata: Metadata;
 
-  constructor(props: Omit<TeamProps, 'acronym' | 'logoSrc' | 'slug'>) {
+  constructor(
+    props: Omit<PropertiesOnly<TeamProps>, 'acronym' | 'linkToDetails' | 'logoSrc' | 'slug'>,
+  ) {
     this.id = props.id;
     this.city = props.city;
     this.organization = props.organization;
@@ -57,6 +60,14 @@ export class Team implements TeamProps {
 
   get logoSrc(): string {
     return 'assets/2026-season/teams-logo/' + this.name.toKebabPascalCase() + '.png';
+  }
+
+  get linkToDetails(): string {
+    return `${this.getClassName()}/${this.id}/${this.slug}`;
+  }
+
+  getClassName(): string {
+    return Team.name.withoutFirstChar().toLowerCase() + 's';
   }
 
   isCityAndOrganizationReversedInName(): boolean {

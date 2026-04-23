@@ -1,7 +1,8 @@
 ﻿import { Metadata } from '../../../shared/models/metadata';
-import { Team } from '../../teams/models/team';
+import { Team } from '../../teams/models/team.model';
 import { MatchId } from '../../../shared/types/branded-types';
 import { DefaultProps } from '../../../shared/interfaces/default-props';
+import { PropertiesOnly } from '../../../shared/types/properties-only';
 
 interface MatchProps extends DefaultProps<MatchId> {
   teams: FixedSizeArray<Team, 2>;
@@ -16,7 +17,7 @@ export class Match implements MatchProps {
   readonly date: Date;
   readonly metadata: Metadata;
 
-  constructor(props: Omit<MatchProps, 'slug'>) {
+  constructor(props: Omit<PropertiesOnly<MatchProps>, 'linkToDetails' | 'slug'>) {
     this.id = props.id;
     this.teams = props.teams;
     this.score = props.score;
@@ -28,6 +29,14 @@ export class Match implements MatchProps {
     const teamA: Team = this.teams[0];
     const teamB: Team = this.teams[1];
     return `${teamA.name} versus ${teamB.name}`.toKebabLowerCase();
+  }
+
+  get linkToDetails(): string {
+    return `${this.getClassName()}/${this.id}/${this.slug}`;
+  }
+
+  getClassName(): string {
+    return Match.name.withoutFirstChar().toLowerCase() + 'es';
   }
 
   isLive(): boolean {

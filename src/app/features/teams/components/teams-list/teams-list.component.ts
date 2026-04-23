@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../../teams.service';
-import { Team } from '../../models/team';
+import { Team } from '../../models/team.model';
 import { TeamsListItemComponent } from './teams-list-item.component';
 
 @Component({

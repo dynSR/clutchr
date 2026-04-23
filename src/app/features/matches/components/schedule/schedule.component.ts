@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatchesService } from '../../services/matches.service';
+import { MatchService } from '../../services/match.service';
 import { ScheduleItemComponent } from './schedule-item.component';
-import { Match } from '../../models/match';
+import { Match } from '../../models/match.model';
 
 @Component({
   selector: 'schedule',
@@ -28,7 +28,7 @@ import { Match } from '../../models/match';
 export class ScheduleComponent implements OnInit {
   protected readonly title: string = 'Incoming matches';
   protected matches: Array<Match> = Array.of();
-  private readonly matchService = new MatchesService();
+  private readonly matchService = new MatchService();
 
   ngOnInit() {
     this.matches = this.matchService.getIncomingMatches();

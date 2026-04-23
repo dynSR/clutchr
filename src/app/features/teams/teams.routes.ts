@@ -1,6 +1,6 @@
 ﻿import { Routes } from '@angular/router';
 
-export const teamsRoutes: Routes = [
+export const teamRoutes: Routes = [
   {
     path: 'teams',
     pathMatch: 'full',

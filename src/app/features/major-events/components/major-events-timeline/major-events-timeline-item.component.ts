@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { MajorEvent } from '../../models/major-event';
+import { MajorEvent } from '../../models/major-event.model';
 
 @Component({
   selector: 'major-events-timeline-item',
   imports: [],
   template: `
     <a
-      href="{{ 'events/' + majorEvent.id }}"
+      href="{{ majorEvent.linkToDetails }}"
       class="flex flex-row items-center gap-md  rounded p-xs interactive"
     >
       <img src="{{ majorEvent.logoSrc }}" alt="Major Event Logo" class="size-[40px]" />
@@ -17,6 +17,6 @@ import { MajorEvent } from '../../models/major-event';
     </a>
   `,
 })
-export class MajorEventTimelineItemComponent {
+export class MajorEventsTimelineItemComponent {
   @Input({ required: true }) majorEvent!: MajorEvent;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamScoreboardItemComponent } from './team-scoreboard-item.component';
 import { TeamsService } from '../../teams.service';
-import { Team } from '../../models/team';
+import { Team } from '../../models/team.model';
 
 @Component({
   selector: 'team-scoreboard',

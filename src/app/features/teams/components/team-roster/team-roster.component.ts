@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Team } from '../../models/team';
+import { Team } from '../../models/team.model';
 import { ActivatedRoute } from '@angular/router';
 import { TeamsService } from '../../teams.service';
 import { TeamLogoNameComponent } from '../../../../shared/components/team-logo-name.component';
