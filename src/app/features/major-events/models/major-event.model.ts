@@ -11,6 +11,7 @@ interface MajorEventProps extends DefaultProps<MajorEventId> {
   location: string;
   startingOn: Date;
   endingOn: Date;
+  period: string;
 }
 
 export class MajorEvent implements MajorEventProps {
@@ -22,9 +23,9 @@ export class MajorEvent implements MajorEventProps {
   readonly location: string;
   readonly startingOn: Date;
   readonly endingOn: Date;
-  readonly metadata: Metadata;
+  readonly metadata?: Metadata;
 
-  constructor(props: Omit<PropertiesOnly<MajorEventProps>, 'linkToDetails' | 'slug'>) {
+  constructor(props: Omit<PropertiesOnly<MajorEventProps>, 'period' | 'linkToDetails' | 'slug'>) {
     this.id = props.id;
     this.name = props.name;
     this.description = props.description;
@@ -41,15 +42,14 @@ export class MajorEvent implements MajorEventProps {
   }
 
   get linkToDetails(): string {
-    console.log(MajorEvent.name);
     return `${this.getClassName()}/${this.id}/${this.slug}`;
+  }
+
+  get period(): string {
+    return `${this.startingOn.toLocaleDateString()} - ${this.endingOn.toLocaleDateString()}`;
   }
 
   getClassName(): string {
     return MajorEvent.name.withoutFirstChar().splitOnCaps().toString().toKebabLowerCase() + 's';
-  }
-
-  getPeriod(): string {
-    return `${this.startingOn.toLocaleDateString()} - ${this.endingOn.toLocaleDateString()}`;
   }
 }

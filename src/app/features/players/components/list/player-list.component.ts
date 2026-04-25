@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'players-list',
+  selector: 'player-list',
   imports: [],
   template: `
     <header>
@@ -13,4 +13,4 @@ import { Component } from '@angular/core';
     class: 'flex flex-col p-lg',
   },
 })
-export class PlayersList {}
+export class PlayerListComponent {}

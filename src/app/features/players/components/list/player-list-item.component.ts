@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'players-list-item',
+  selector: 'player-list-item',
   imports: [],
   template: ` <p>Players list item works</p> `,
 })
-export class PlayersListItem {}
+export class PlayerListItemComponent {}

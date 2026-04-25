@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TeamScoreboardItemComponent } from './team-scoreboard-item.component';
-import { TeamsService } from '../../teams.service';
+import { TeamService } from '../../team.service';
 import { Team } from '../../models/team.model';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'team-scoreboard',
-  imports: [TeamScoreboardItemComponent],
+  imports: [TeamScoreboardItemComponent, AsyncPipe],
   template: `
     <header class="flex flex-row items-center justify-between h-[40px]">
       <h5 class="uppercase">{{ title }}</h5>
-      <ul role="group" aria-label="Team Scoreboard Filters" class="flex flex-row items-center gap-2">
+      <ul
+        role="group"
+        aria-label="Team Scoreboard Filters"
+        class="flex flex-row items-center gap-2"
+      >
         <li>
           <button type="button">⏹</button>
         </li>
@@ -24,27 +30,29 @@ import { Team } from '../../models/team.model';
         </li>
       </ul>
     </header>
-    <ul class="flex flex-col gap-xs">
-      @for (team of teams; track team.id) {
-        <li>
-          <team-scoreboard-item [team]="team" [position]="$index" />
-        </li>
-        @if ($index < teams.length - 1) {
-          <hr />
+
+    @if (teams$ | async; as teams) {
+      <ul class="flex flex-col gap-xs">
+        @for (team of teams; track team.id) {
+          <li>
+            <team-scoreboard-item [team]="team" [position]="$index" />
+          </li>
+          @if ($index < teams.length - 1) {
+            <hr />
+          }
         }
-      }
-    </ul>
+      </ul>
+    }
   `,
   host: {
-    class: 'flex flex-col gap-xs'
-  }
+    class: 'flex flex-col gap-xs',
+  },
 })
-export class TeamScoreboardComponent implements OnInit {
+export class TeamScoreboardComponent {
   protected readonly title: string = 'Standings';
-  protected teams: Array<Team> = Array.of();
-  private readonly teamsService = new TeamsService();
+  protected teams$: Observable<Array<Team>>;
 
-  ngOnInit(): void {
-    this.teams = this.teamsService.getTeams();
+  constructor(private readonly teamService: TeamService) {
+    this.teams$ = this.teamService.getAll();
   }
 }

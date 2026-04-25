@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
-import { matchesData } from '../matches-data';
-import { Match } from '../models/match.model';
+import { matchesData } from './matches-data';
+import { Match } from './models/match.model';
 
 @Injectable({ providedIn: 'root' })
 export class MatchService {

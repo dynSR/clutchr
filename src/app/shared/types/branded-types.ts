@@ -15,7 +15,7 @@ export function createId<B extends string>(): Brand<string, B> {
   return id as Brand<string, B>;
 }
 
-export function createFrom<B extends string>(input: string): Brand<string, B> {
+export function createIdFrom<B extends string>(input: string): Brand<string, B> {
   if (input.isNullOrEmpty()) throw new Error(`Input is required to be defined and not empty.`);
   return input as Brand<string, B>;
 }

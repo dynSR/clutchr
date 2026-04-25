@@ -1,6 +1,4 @@
-﻿import { Organization } from '../enums/organization.enum';
-
-const ROOT_PATH: string = 'assets/';
+﻿const ROOT_PATH: string = '/assets/';
 const FONTS_FOLDER_PATH: string = ROOT_PATH + 'fonts/';
 
 export const ASSETS_PLACEHOLDER_LOGO_IMG = ROOT_PATH + 'Logo_Placeholder.png';
@@ -11,6 +9,7 @@ export enum AssetFileExtension {
   JPEG = '.jpeg',
   SVG = '.svg',
   WOFF2 = '.woff2',
+  JSON = '.json',
 }
 
 export function assets(

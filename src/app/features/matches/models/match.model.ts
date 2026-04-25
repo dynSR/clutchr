@@ -8,6 +8,7 @@ interface MatchProps extends DefaultProps<MatchId> {
   teams: FixedSizeArray<Team, 2>;
   score: FixedSizeArray<number, 2>;
   date: Date;
+  isLive: boolean;
 }
 
 export class Match implements MatchProps {
@@ -15,14 +16,23 @@ export class Match implements MatchProps {
   readonly teams: FixedSizeArray<Team, 2>;
   readonly score: FixedSizeArray<number, 2>;
   readonly date: Date;
-  readonly metadata: Metadata;
+  readonly metadata?: Metadata;
 
-  constructor(props: Omit<PropertiesOnly<MatchProps>, 'linkToDetails' | 'slug'>) {
+  constructor(props: Omit<PropertiesOnly<MatchProps>, 'isLive' | 'linkToDetails' | 'slug'>) {
     this.id = props.id;
     this.teams = props.teams;
     this.score = props.score;
     this.date = props.date;
     this.metadata = props.metadata;
+  }
+
+  get isLive(): boolean {
+    const matchDurationMs = 90 * 60 * 1000;
+    const now = new Date().getTime();
+    const matchStart = this.date.getTime();
+    const matchEnd = matchStart + matchDurationMs;
+
+    return matchStart <= now && now <= matchEnd;
   }
 
   get slug(): string {
@@ -37,14 +47,5 @@ export class Match implements MatchProps {
 
   getClassName(): string {
     return Match.name.withoutFirstChar().toLowerCase() + 'es';
-  }
-
-  isLive(): boolean {
-    const matchDurationMs = 90 * 60 * 1000;
-    const now = new Date().getTime();
-    const matchStart = this.date.getTime();
-    const matchEnd = matchStart + matchDurationMs;
-
-    return matchStart <= now && now <= matchEnd;
   }
 }

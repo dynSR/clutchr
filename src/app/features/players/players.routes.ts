@@ -5,6 +5,6 @@ export const playersRoutes: Routes = [
     path: 'players',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./components/players-list/players-list').then((m) => m.PlayersList),
+      import('./components/list/player-list.component').then((m) => m.PlayerListComponent),
   },
 ];

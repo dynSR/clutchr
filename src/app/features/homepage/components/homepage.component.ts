@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TeamScoreboardComponent } from '../../teams/components/scoreboard/team-scoreboard.component';
 import { SeasonBannerComponent } from './season-banner.component';
-import { MajorEventsTimelineComponent } from '../../major-events/components/major-events-timeline/major-events-timeline.component';
+import { MajorEventListComponent } from '../../major-events/components/list/major-event-list.component';
 import { ArticleListComponent } from '../../articles/components/list/article-list.component';
 import { ScheduleComponent } from '../../matches/components/schedule/schedule.component';
 
@@ -10,7 +10,7 @@ import { ScheduleComponent } from '../../matches/components/schedule/schedule.co
   imports: [
     TeamScoreboardComponent,
     SeasonBannerComponent,
-    MajorEventsTimelineComponent,
+    MajorEventListComponent,
     ArticleListComponent,
     ScheduleComponent,
   ],
@@ -18,7 +18,7 @@ import { ScheduleComponent } from '../../matches/components/schedule/schedule.co
     <aside class="flex flex-col flex-1 h-fit gap-lg">
       <season-banner />
       <team-scoreboard />
-      <major-events-timeline />
+      <major-event-list />
     </aside>
 
     <section class="flex flex-col flex-3 gap-md">

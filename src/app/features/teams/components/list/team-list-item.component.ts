@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input } from '@angular/core';
+import { AfterViewInit, Component, computed, ElementRef, HostListener, Input } from '@angular/core';
 import { Team } from '../../models/team.model';
 import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum';
 import { Color } from '../../../../shared/utils/color';
+import { Organization } from '../../../../shared/enums/organization.enum';
 
 @Component({
-  selector: 'teams-list-item',
+  selector: 'team-list-item',
   imports: [],
   template: `
     <header class="flex justify-center items-center size-[256px]">
@@ -12,7 +13,7 @@ import { Color } from '../../../../shared/utils/color';
     </header>
 
     <section role="group" class="flex flex-col items-center uppercase">
-      @if (!team.isCityAndOrganizationReversedInName()) {
+      @if (!this.areCityOrganizationReversed()) {
         <p class="numeric font-black">{{ team.city }}</p>
         <h3 [style.color]="team.colors.primary.toString()">
           {{ team.organization }}
@@ -38,15 +39,21 @@ import { Color } from '../../../../shared/utils/color';
       'overflow-hidden pointer-events-none hover:bg-primary-50/20',
   },
 })
-export class TeamsListItemComponent implements AfterViewInit {
+export class TeamListItemComponent implements AfterViewInit {
   @Input({ required: true }) team!: Team;
   protected readonly LinkFlavorText = LinkFlavourText;
+  protected areCityOrganizationReversed = computed(() => {
+    return [Organization.Cloud9, Organization.Faze, Organization.G2, Organization.Optic].includes(
+      this.team.organization,
+    );
+  });
   private readonly defaultHostBackgroundColor = new Color(44, 44, 44, 0.2);
 
   constructor(private readonly elementRef: ElementRef) {}
 
   ngAfterViewInit() {
     this.elementRef.nativeElement.style.background = this.defaultHostBackgroundColor.toString();
+    console.log(this.team.logoSrc);
   }
 
   @HostListener('mouseenter') onMouseEnter() {

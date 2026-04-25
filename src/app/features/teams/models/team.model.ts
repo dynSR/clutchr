@@ -6,11 +6,6 @@ import { City } from '../../../shared/enums/city.enum';
 import { Color } from '../../../shared/utils/color';
 import { PropertiesOnly } from '../../../shared/types/properties-only';
 
-interface TeamColors {
-  primary: Color;
-  secondary?: Color;
-}
-
 interface TeamProps extends DefaultProps<TeamId> {
   organization: Organization;
   city: City;
@@ -20,17 +15,25 @@ interface TeamProps extends DefaultProps<TeamId> {
   colors: TeamColors;
 }
 
+interface TeamColors {
+  primary: Color;
+  secondary?: Color;
+}
+
+export type RawTeam = Omit<
+  PropertiesOnly<TeamProps>,
+  'acronym' | 'linkToDetails' | 'logoSrc' | 'slug'
+>;
+
 export class Team implements TeamProps {
   readonly id: TeamId;
   readonly city: City;
   readonly organization: Organization;
   readonly cdlPoints: number;
   readonly colors: TeamColors;
-  readonly metadata: Metadata;
+  readonly metadata?: Metadata;
 
-  constructor(
-    props: Omit<PropertiesOnly<TeamProps>, 'acronym' | 'linkToDetails' | 'logoSrc' | 'slug'>,
-  ) {
+  constructor(props: RawTeam) {
     this.id = props.id;
     this.city = props.city;
     this.organization = props.organization;
@@ -48,7 +51,13 @@ export class Team implements TeamProps {
   }
 
   get name(): string {
-    const teamName = this.isCityAndOrganizationReversedInName()
+    const areCityOrganizationReversed = [
+      Organization.Cloud9,
+      Organization.Faze,
+      Organization.G2,
+      Organization.Optic,
+    ].includes(this.organization);
+    const teamName = areCityOrganizationReversed
       ? this.organization + String.WhiteSpace + this.city
       : this.city + String.WhiteSpace + this.organization;
     return teamName.allCapitalized();
@@ -68,11 +77,5 @@ export class Team implements TeamProps {
 
   getClassName(): string {
     return Team.name.withoutFirstChar().toLowerCase() + 's';
-  }
-
-  isCityAndOrganizationReversedInName(): boolean {
-    return [Organization.Cloud9, Organization.Faze, Organization.G2, Organization.Optic].includes(
-      this.organization,
-    );
   }
 }

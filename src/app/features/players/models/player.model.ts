@@ -19,7 +19,7 @@ export class Player implements PlayerProps {
   readonly position: PlayerPosition;
   readonly identity: PlayerIdentity;
   readonly number: string | number;
-  readonly metadata: Metadata;
+  readonly metadata?: Metadata;
 
   constructor(props: Omit<PropertiesOnly<PlayerProps>, 'iconSrc' | 'linkToDetails' | 'slug'>) {
     this.id = props.id;

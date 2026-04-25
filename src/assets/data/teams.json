@@ -3,7 +3,7 @@
     "id": "8b78a8e6-7947-4788-8472-ddda9ddfb660",
     "cdlPoints": 0,
     "city": "boston",
-    "color": {
+    "colors": {
       "primary": "#03ff5b"
     },
     "organization": "Breach"
@@ -12,7 +12,7 @@
     "id": "35554f3c-f83c-4a79-9f0f-585cd86f69df",
     "cdlPoints": 0,
     "city": "carolina",
-    "color": {
+    "colors": {
       "primary": "#0083c1"
     },
     "organization": "Royal Ravens"
@@ -21,7 +21,7 @@
     "id": "d0746aea-7c30-4780-b2e0-72a15bd5cc0b",
     "cdlPoints": 0,
     "city": "new york",
-    "color": {
+    "colors": {
       "primary": "#00aeef"
     },
     "organization": "Cloud9"
@@ -30,7 +30,7 @@
     "id": "bcf2f9d2-49ee-4ed1-9fc4-3ae8ae560611",
     "cdlPoints": 0,
     "city": "vegas",
-    "color": {
+    "colors": {
       "primary": "#ff00ff"
     },
     "organization": "Faze"
@@ -39,7 +39,7 @@
     "id": "31f16336-2fe3-4217-a3de-ebfbfbd8ae52",
     "cdlPoints": 0,
     "city": "minnesota",
-    "color": {
+    "colors": {
       "primary": "#351f65"
     },
     "organization": "G2"
@@ -48,7 +48,7 @@
     "id": "3a7513d0-7338-4c2a-8b76-899209c077d1",
     "cdlPoints": 0,
     "city": "los angeles",
-    "color": {
+    "colors": {
       "primary": "#ed2224"
     },
     "organization": "Thieves"
@@ -57,7 +57,7 @@
     "id": "8a3c1682-9ec4-453f-868a-f6d70f9c9bc9",
     "cdlPoints": 0,
     "city": "miami",
-    "color": {
+    "colors": {
       "primary": "#216d6b",
       "secondary": "#ff6d17"
     },
@@ -67,7 +67,7 @@
     "id": "82f405f9-3f18-4743-845c-54f4d9f42d2c",
     "cdlPoints": 0,
     "city": "texas",
-    "color": {
+    "colors": {
       "primary": "#92c951"
     },
     "organization": "Optic"
@@ -76,7 +76,7 @@
     "id": "46223ee9-eb6e-4fcf-8637-56a9c7bd971d",
     "cdlPoints": 0,
     "city": "paris",
-    "color": {
+    "colors": {
       "primary": "#ed89e5"
     },
     "organization": "Gentle Mates"
@@ -85,7 +85,7 @@
     "id": "87d2b865-d393-4c26-b0e9-be3025c01242",
     "cdlPoints": 0,
     "city": "riyadh",
-    "color": {
+    "colors": {
       "primary": "#19ce84"
     },
     "organization": "Falcons"
@@ -94,7 +94,7 @@
     "id": "ddf7f88a-59d9-4a5f-8f91-1b4e847d5bfb",
     "cdlPoints": 0,
     "city": "toronto",
-    "color": {
+    "colors": {
       "primary": "#782cf2"
     },
     "organization": "KOI"
@@ -103,7 +103,7 @@
     "id": "98bf8195-3f62-4cdf-8e3f-3e91b428c84c",
     "cdlPoints": 0,
     "city": "vancouver",
-    "color": {
+    "colors": {
       "primary": "#03ffce"
     },
     "organization": "Surge"

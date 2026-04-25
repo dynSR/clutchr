@@ -47,7 +47,7 @@ export class Article implements ArticleProps, CarouselItem {
   readonly illustrationSrc: string;
   readonly author: string;
   readonly publishedOn: Date;
-  readonly metadata: Metadata;
+  readonly metadata?: Metadata;
 
   constructor(props: Omit<PropertiesOnly<ArticleProps>, 'linkToDetails' | 'slug'>) {
     this.id = props.id;

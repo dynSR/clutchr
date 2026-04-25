@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatchService } from '../../services/match.service';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MatchService } from '../../match.service';
 import { ScheduleItemComponent } from './schedule-item.component';
 import { Match } from '../../models/match.model';
 
