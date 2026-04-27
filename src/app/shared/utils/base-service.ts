@@ -1,17 +1,18 @@
-﻿import { DefaultProps } from '../interfaces/default-props';
-import { ID } from '../types/branded-types';
-import { HttpClient } from '@angular/common/http';
-import { map, Observable, of } from 'rxjs';
-import { Mapper } from '../interfaces/mapper';
+﻿import {ID} from '../types/branded-types';
+import {HttpClient} from '@angular/common/http';
+import {map, Observable, of} from 'rxjs';
+import {Mapper} from '../interfaces/mapper';
+import {ModelProps} from './base-model';
 
-export abstract class BaseService<T extends DefaultProps<ID>, TRaw> {
+export abstract class BaseService<T extends ModelProps<ID>, TRaw> {
   protected cachedData: Array<T> = Array.of();
   protected abstract dataFilePath: string;
 
   protected constructor(
     protected readonly http: HttpClient,
     private readonly mapper: Mapper<T, TRaw>,
-  ) {}
+  ) {
+  }
 
   getAll(): Observable<Array<T>> {
     return new Observable((observer) => {

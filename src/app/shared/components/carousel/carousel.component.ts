@@ -17,7 +17,7 @@ import { CarouselIndicatorsComponent } from './carousel-indicators.component';
 import { UIPosition } from '../../enums/ui-position.enum';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Timer } from '../../utils/timer';
-import { CarouselItem } from './CarouselItem';
+import { CarouselItemProps } from '../../interfaces/carousel-item-props';
 import Slider = SliderModule.Slider;
 
 @Component({
@@ -71,7 +71,7 @@ import Slider = SliderModule.Slider;
   },
 })
 export class CarouselComponent implements AfterViewInit, OnDestroy {
-  @Input({ required: true }) items!: Array<CarouselItem>;
+  @Input({ required: true }) items!: Array<CarouselItemProps>;
   @Input({ required: false }) slidingDelayInSeconds: number = 5;
 
   @ViewChild('carouselItemsWrapper') itemWrapper!: ElementRef<HTMLUListElement>;

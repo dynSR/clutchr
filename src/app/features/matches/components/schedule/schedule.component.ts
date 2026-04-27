@@ -1,37 +1,41 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatchService } from '../../match.service';
-import { ScheduleItemComponent } from './schedule-item.component';
-import { Match } from '../../models/match.model';
+import {Component} from '@angular/core';
+import {MatchService} from '../../match.service';
+import {ScheduleItemComponent} from './schedule-item.component';
+import {Match} from '../../models/match.model';
+import {Observable} from 'rxjs';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'schedule',
-  imports: [ScheduleItemComponent],
+  imports: [ScheduleItemComponent, AsyncPipe],
   template: `
     <header class="flex flex-row items-center justify-between h-[40px]">
       <h5 class="uppercase">{{ title }}</h5>
     </header>
-    <ul class="flex flex-col gap-sm">
-      @for (match of matches; track match.id) {
-        <li>
-          <schedule-item [match]="match" />
-        </li>
-        @if ($index < matches.length - 1) {
-          <hr />
+    @if (matches$ | async; as matches) {
+      <ul class="flex flex-col gap-sm">
+        @for (match of matches; track match.id) {
+          <li>
+            <schedule-item [match]="match"/>
+          </li>
+          @if ($index < matches.length - 1) {
+            <hr/>
+          }
         }
-      }
-    </ul>
+      </ul>
+    } @else {
+      <p>No matches found.</p>
+    }
   `,
   host: {
     class: 'flex flex-col gap-xs',
   },
 })
-export class ScheduleComponent implements OnInit {
+export class ScheduleComponent {
   protected readonly title: string = 'Incoming matches';
-  protected matches: Array<Match> = Array.of();
-  private readonly matchService = new MatchService();
+  protected matches$: Observable<Array<Match>>;
 
-  ngOnInit() {
-    this.matches = this.matchService.getIncomingMatches();
-    console.log(this.matches);
+  constructor(private readonly matchService: MatchService) {
+    this.matches$ = this.matchService.getAll();
   }
 }

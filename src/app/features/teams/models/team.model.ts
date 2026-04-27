@@ -1,12 +1,12 @@
-﻿import { TeamId } from '../../../shared/types/branded-types';
-import { Organization } from '../../../shared/enums/organization.enum';
-import { Metadata } from '../../../shared/models/metadata';
-import { DefaultProps } from '../../../shared/interfaces/default-props';
-import { City } from '../../../shared/enums/city.enum';
-import { Color } from '../../../shared/utils/color';
-import { PropertiesOnly } from '../../../shared/types/properties-only';
+﻿import {TeamId} from '../../../shared/types/branded-types';
+import {Organization} from '../../../shared/enums/organization.enum';
+import {City} from '../../../shared/enums/city.enum';
+import {Color} from '../../../shared/utils/color';
+import {PropertiesOnly} from '../../../shared/types/properties-only';
+import {BaseModel, ModelProps} from '../../../shared/utils/base-model';
 
-interface TeamProps extends DefaultProps<TeamId> {
+type TeamProps = ModelProps<TeamId> & {
+  name: string;
   organization: Organization;
   city: City;
   acronym: string;
@@ -20,26 +20,31 @@ interface TeamColors {
   secondary?: Color;
 }
 
-export type RawTeam = Omit<
+export type TeamJsonProps = Omit<
   PropertiesOnly<TeamProps>,
-  'acronym' | 'linkToDetails' | 'logoSrc' | 'slug'
+  'acronym' | 'name' | 'linkToDetails' | 'logoSrc' | 'slug'
 >;
 
-export class Team implements TeamProps {
-  readonly id: TeamId;
+export class Team extends BaseModel<TeamId> implements TeamProps {
   readonly city: City;
   readonly organization: Organization;
   readonly cdlPoints: number;
   readonly colors: TeamColors;
-  readonly metadata?: Metadata;
 
-  constructor(props: RawTeam) {
-    this.id = props.id;
+  constructor(props: TeamJsonProps) {
+    super(props);
     this.city = props.city;
     this.organization = props.organization;
     this.cdlPoints = props.cdlPoints;
     this.colors = props.colors;
-    this.metadata = props.metadata;
+  }
+
+  override get linkToDetails(): string {
+    return `teams/${this.id}/${this.slug}`;
+  }
+
+  override get slug(): string {
+    return this.name.toKebabLowerCase();
   }
 
   get acronym(): string {
@@ -63,19 +68,7 @@ export class Team implements TeamProps {
     return teamName.allCapitalized();
   }
 
-  get slug(): string {
-    return this.name.toKebabLowerCase();
-  }
-
   get logoSrc(): string {
     return 'assets/2026-season/teams-logo/' + this.name.toKebabPascalCase() + '.png';
-  }
-
-  get linkToDetails(): string {
-    return `${this.getClassName()}/${this.id}/${this.slug}`;
-  }
-
-  getClassName(): string {
-    return Team.name.withoutFirstChar().toLowerCase() + 's';
   }
 }

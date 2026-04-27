@@ -1,9 +1,8 @@
-﻿import { MajorEventId } from '../../../shared/types/branded-types';
-import { Metadata } from '../../../shared/models/metadata';
-import { DefaultProps } from '../../../shared/interfaces/default-props';
-import { PropertiesOnly } from '../../../shared/types/properties-only';
+﻿import {MajorEventId} from '../../../shared/types/branded-types';
+import {PropertiesOnly} from '../../../shared/types/properties-only';
+import {BaseModel, ModelProps} from '../../../shared/utils/base-model';
 
-interface MajorEventProps extends DefaultProps<MajorEventId> {
+type MajorEventProps = ModelProps<MajorEventId> & {
   name: string;
   description?: string;
   logoSrc: string;
@@ -14,42 +13,42 @@ interface MajorEventProps extends DefaultProps<MajorEventId> {
   period: string;
 }
 
-export class MajorEvent implements MajorEventProps {
-  readonly id: MajorEventId;
+export type MajorEventJsonProps = Omit<
+  PropertiesOnly<MajorEventProps>,
+  'period' | 'linkToDetails' | 'logoSrc' | 'slug'
+>
+
+export class MajorEvent extends BaseModel<MajorEventId> implements MajorEventProps {
   readonly name: string;
   readonly description?: string;
-  readonly logoSrc: string;
   readonly host: string;
   readonly location: string;
   readonly startingOn: Date;
   readonly endingOn: Date;
-  readonly metadata?: Metadata;
 
-  constructor(props: Omit<PropertiesOnly<MajorEventProps>, 'period' | 'linkToDetails' | 'slug'>) {
-    this.id = props.id;
+  constructor(props: MajorEventJsonProps) {
+    super(props)
     this.name = props.name;
     this.description = props.description;
-    this.logoSrc = props.logoSrc;
     this.startingOn = props.startingOn;
     this.endingOn = props.endingOn;
     this.host = props.host;
     this.location = props.location;
-    this.metadata = props.metadata;
   }
 
-  get slug(): string {
+  override get linkToDetails(): string {
+    return `major-events/${this.id}/${this.slug}`;
+  }
+
+  override get slug(): string {
     return (this.name + ' hosted by ' + this.host + ' in ' + this.location).toKebabLowerCase();
   }
 
-  get linkToDetails(): string {
-    return `${this.getClassName()}/${this.id}/${this.slug}`;
+  get logoSrc(): string {
+    return String.Empty;
   }
 
   get period(): string {
     return `${this.startingOn.toLocaleDateString()} - ${this.endingOn.toLocaleDateString()}`;
-  }
-
-  getClassName(): string {
-    return MajorEvent.name.withoutFirstChar().splitOnCaps().toString().toKebabLowerCase() + 's';
   }
 }

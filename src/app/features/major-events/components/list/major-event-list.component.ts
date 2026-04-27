@@ -1,34 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { MajorEvent } from '../../models/major-event.model';
-import { MajorEventListItemComponent } from './major-event-list-item.component';
-import { MajorEventService } from '../../major-event.service';
+import {Component} from '@angular/core';
+import {MajorEvent} from '../../models/major-event.model';
+import {MajorEventListItemComponent} from './major-event-list-item.component';
+import {MajorEventService} from '../../major-event.service';
+import {Observable} from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'major-event-list',
-  imports: [MajorEventListItemComponent],
+  imports: [MajorEventListItemComponent, AsyncPipe],
   template: `
     <header class="h-[40px]">
       <h5 class="uppercase">{{ title }}</h5>
     </header>
-    <ul class="flex flex-col gap-xs">
-      @for (majorEvent of majorEvents; track majorEvent.id) {
-        <li>
-          <major-event-list-item [majorEvent]="majorEvent" />
-        </li>
-        @if ($index < majorEvents.length - 1) {
-          <hr>
+    @if (majorEvents$ | async; as majorEvents) {
+      <ul class="flex flex-col gap-xs">
+        @for (majorEvent of majorEvents; track majorEvent.id) {
+          <li>
+            <major-event-list-item [majorEvent]="majorEvent"/>
+          </li>
+          @if ($index < majorEvents.length - 1) {
+            <hr>
+          }
         }
-      }
-    </ul>
+      </ul>
+    } @else {
+      <p>No major events found.</p>
+    }
   `,
 })
-export class MajorEventListComponent implements OnInit {
+export class MajorEventListComponent {
   protected readonly title: string = '2026 CDL Events';
-  protected majorEvents: Array<MajorEvent> = Array.of();
+  protected majorEvents$: Observable<Array<MajorEvent>>;
 
-  private readonly majorEventsService: MajorEventService = new MajorEventService();
-
-  ngOnInit(): void {
-    this.majorEvents = this.majorEventsService.getMajorEvents();
+  constructor(private readonly majorEventsService: MajorEventService) {
+    this.majorEvents$ = this.majorEventsService.getAll();
   }
 }

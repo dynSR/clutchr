@@ -1,35 +1,32 @@
-﻿import { DefaultProps } from '../../../shared/interfaces/default-props';
-import { PlayerPositionId } from '../../../shared/types/branded-types';
-import { Metadata } from '../../../shared/models/metadata';
-import { PropertiesOnly } from '../../../shared/types/properties-only';
+﻿import {PlayerPositionId} from '../../../shared/types/branded-types';
+import {PropertiesOnly} from '../../../shared/types/properties-only';
+import {BaseModel, ModelProps} from '../../../shared/utils/base-model';
 
-interface PlayerPositionProps extends DefaultProps<PlayerPositionId> {
+type PlayerPositionProps = ModelProps<PlayerPositionId> & {
   name: string;
   acronym: string;
 }
 
-export class PlayerPosition implements PlayerPositionProps {
-  readonly id: PlayerPositionId;
+export type PlayerPositionJsonProps = Omit<
+  PropertiesOnly<PlayerPositionProps>,
+  'className' | 'linkToDetails' | 'slug'
+>;
+
+export class PlayerPosition extends BaseModel<PlayerPositionId> implements PlayerPositionProps {
   readonly name: string;
   readonly acronym: string;
-  readonly metadata?: Metadata;
 
-  constructor(props: Omit<PropertiesOnly<PlayerPositionProps>, 'linkToDetails' | 'slug'>) {
-    this.id = props.id;
+  constructor(props: PlayerPositionJsonProps) {
+    super(props);
     this.name = props.name;
     this.acronym = props.acronym;
-    this.metadata = props.metadata;
   }
 
-  get slug(): string {
+  override get slug(): string {
     return String.Empty;
   }
 
-  get linkToDetails(): string {
-    return `${this.getClassName()}/${this.id}/${this.slug}`;
-  }
-
-  getClassName(): string {
-    return PlayerPosition.name.withoutFirstChar().toLowerCase() + 's';
+  override get linkToDetails(): string {
+    return `player-positions/${this.id}/${this.slug}`;
   }
 }

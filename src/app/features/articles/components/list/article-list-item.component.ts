@@ -12,9 +12,9 @@ import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum
       <section role="group" class="flex justify-between items-center gap-xs w-full">
         <section role="group" class="flex flex-col">
           <small class="numeric">{{ article.publishedOn | date: 'fullDate' }}</small>
-          <a href="" class="underline pointer-events-auto">
-            {{ article.author }}
-          </a>
+          <!--          <a href="" class="underline pointer-events-auto">-->
+          <!--            {{ article.author }}-->
+          <!--          </a>-->
         </section>
         <!-- Type badge -->
         <small class="badge bg-neutral-800">{{ article.type }}</small>
@@ -24,13 +24,13 @@ import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum
       <section
         class="flex justify-center items-center h-[20rem] overflow-hidden rounded bg-neutral-950"
       >
-        <img src="{{ article.illustrationSrc }}" alt="{{ article.title }}" />
+        <img src="{{ article.illustrationSrc }}" alt="{{ article.title }}"/>
       </section>
     </header>
 
     <!-- Title and summary -->
     <section role="group" class="flex flex-col items-start">
-      <h5>{{ article.getFullTitle() }}</h5>
+      <h5>{{ article.fullTitle }}</h5>
       <p>{{ article.summary }}</p>
     </section>
 

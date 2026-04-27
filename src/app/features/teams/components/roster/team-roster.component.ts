@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Team } from '../../models/team.model';
 import { ActivatedRoute } from '@angular/router';
 import { TeamService } from '../../team.service';
-import { TeamLogoNameComponent } from '../../../../shared/components/team-logo-name.component';
+import { TeamLogoNameComponent } from '../shared/team-logo-name.component';
 import { TextBlockType } from '../../../../shared/enums/text-block-type.enum';
 import { createIdFrom, TeamId } from '../../../../shared/types/branded-types';
 import { Observable, of } from 'rxjs';

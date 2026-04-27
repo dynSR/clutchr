@@ -1,16 +1,15 @@
-﻿import { Injectable } from '@angular/core';
-import { articlesData } from './articles-data';
-import { Article } from './models/article.model';
+﻿import {Injectable} from '@angular/core';
+import {Article, ArticleJsonProps} from './models/article.model';
+import {BaseService} from '../../shared/utils/base-service';
+import {AssetFileExtension, assets} from '../../shared/utils/assets-finder';
+import {HttpClient} from '@angular/common/http';
+import {ArticleMapper} from './article.mapper';
 
-@Injectable({ providedIn: 'root' })
-export class ArticleService {
-  private readonly news: Array<Article> = articlesData;
+@Injectable({providedIn: 'root'})
+export class ArticleService extends BaseService<Article, ArticleJsonProps> {
+  protected override dataFilePath: string = assets('data/articles', AssetFileExtension.JSON);
 
-  getNewsWithLimit(limit: number) {
-    return this.getNews().slice(0, limit);
-  }
-
-  getNews(): Array<Article> {
-    return this.news.sort((a, b) => b.publishedOn.getTime() - a.publishedOn.getTime());
+  constructor(protected override http: HttpClient) {
+    super(http, ArticleMapper);
   }
 }

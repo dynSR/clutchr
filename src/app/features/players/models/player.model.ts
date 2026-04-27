@@ -1,11 +1,15 @@
-﻿import { DefaultProps } from '../../../shared/interfaces/default-props';
-import { Metadata } from '../../../shared/models/metadata';
-import { PlayerId } from '../../../shared/types/branded-types';
-import { PlayerIdentity } from './player-identity.model';
-import { PlayerPosition } from '../../player-positions/models/player-position.model';
-import { PropertiesOnly } from '../../../shared/types/properties-only';
+﻿import {PlayerId} from '../../../shared/types/branded-types';
+import {PlayerPosition} from '../../player-positions/models/player-position.model';
+import {PropertiesOnly} from '../../../shared/types/properties-only';
+import {BaseModel, ModelProps} from '../../../shared/utils/base-model';
 
-interface PlayerProps extends DefaultProps<PlayerId> {
+type PlayerIdentity = {
+  name: string;
+  birthday: Date;
+  overview: string;
+}
+
+type PlayerProps = ModelProps<PlayerId> & {
   tag: string;
   identity: PlayerIdentity;
   number: string | number;
@@ -13,36 +17,34 @@ interface PlayerProps extends DefaultProps<PlayerId> {
   position: PlayerPosition;
 }
 
-export class Player implements PlayerProps {
-  readonly id: PlayerId;
+export type PlayerJsonProps = Omit<
+  PropertiesOnly<PlayerProps>,
+  'iconSrc' | 'linkToDetails' | 'slug'
+>;
+
+export class Player extends BaseModel<PlayerId> implements PlayerProps {
   readonly tag: string;
   readonly position: PlayerPosition;
   readonly identity: PlayerIdentity;
   readonly number: string | number;
-  readonly metadata?: Metadata;
 
-  constructor(props: Omit<PropertiesOnly<PlayerProps>, 'iconSrc' | 'linkToDetails' | 'slug'>) {
-    this.id = props.id;
+  constructor(props: PlayerJsonProps) {
+    super(props);
     this.tag = props.tag;
     this.position = props.position;
     this.identity = props.identity;
     this.number = props.number;
-    this.metadata = props.metadata;
+  }
+
+  override get slug(): string {
+    return String.Empty;
+  }
+
+  override get linkToDetails(): string {
+    return `players/${this.id}/${this.slug}`;
   }
 
   get iconSrc(): string {
     return String.Empty;
-  }
-
-  get slug(): string {
-    return String.Empty;
-  }
-
-  get linkToDetails(): string {
-    return `${this.getClassName()}/${this.id}/${this.slug}`;
-  }
-
-  getClassName(): string {
-    return Player.name.withoutFirstChar().toLowerCase() + 's';
   }
 }

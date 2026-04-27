@@ -1,4 +1,5 @@
-﻿export interface Mapper<T, TRaw> {
-  fromJSON(raw: TRaw): T;
-  toJSON(obj: T): TRaw;
+﻿export interface Mapper<T, TJson> {
+  fromJSON(raw: TJson): T;
+
+  toJSON(obj: T): TJson;
 }

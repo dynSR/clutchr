@@ -1,29 +1,40 @@
-﻿import { Metadata } from '../../../shared/models/metadata';
-import { Team } from '../../teams/models/team.model';
-import { MatchId } from '../../../shared/types/branded-types';
-import { DefaultProps } from '../../../shared/interfaces/default-props';
-import { PropertiesOnly } from '../../../shared/types/properties-only';
+﻿import {Team} from '../../teams/models/team.model';
+import {MatchId} from '../../../shared/types/branded-types';
+import {PropertiesOnly} from '../../../shared/types/properties-only';
+import {BaseModel, ModelProps} from '../../../shared/utils/base-model';
 
-interface MatchProps extends DefaultProps<MatchId> {
+type MatchProps = ModelProps<MatchId> & {
   teams: FixedSizeArray<Team, 2>;
   score: FixedSizeArray<number, 2>;
   date: Date;
   isLive: boolean;
 }
 
-export class Match implements MatchProps {
-  readonly id: MatchId;
+export type MatchJsonProps = Omit<
+  PropertiesOnly<MatchProps>,
+  'isLive' | 'linkToDetails' | 'slug'
+>;
+
+export class Match extends BaseModel<MatchId> implements MatchProps {
   readonly teams: FixedSizeArray<Team, 2>;
   readonly score: FixedSizeArray<number, 2>;
   readonly date: Date;
-  readonly metadata?: Metadata;
 
-  constructor(props: Omit<PropertiesOnly<MatchProps>, 'isLive' | 'linkToDetails' | 'slug'>) {
-    this.id = props.id;
+  constructor(props: MatchJsonProps) {
+    super(props);
     this.teams = props.teams;
     this.score = props.score;
     this.date = props.date;
-    this.metadata = props.metadata;
+  }
+
+  override get linkToDetails(): string {
+    return `matches/${this.id}/${this.slug}`;
+  }
+
+  override get slug(): string {
+    const teamA: Team = this.teams[0];
+    const teamB: Team = this.teams[1];
+    return `${teamA.name} versus ${teamB.name}`.toKebabLowerCase();
   }
 
   get isLive(): boolean {
@@ -33,19 +44,5 @@ export class Match implements MatchProps {
     const matchEnd = matchStart + matchDurationMs;
 
     return matchStart <= now && now <= matchEnd;
-  }
-
-  get slug(): string {
-    const teamA: Team = this.teams[0];
-    const teamB: Team = this.teams[1];
-    return `${teamA.name} versus ${teamB.name}`.toKebabLowerCase();
-  }
-
-  get linkToDetails(): string {
-    return `${this.getClassName()}/${this.id}/${this.slug}`;
-  }
-
-  getClassName(): string {
-    return Match.name.withoutFirstChar().toLowerCase() + 'es';
   }
 }
