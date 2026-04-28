@@ -3,7 +3,6 @@
 export type Brand<T, B extends string> = T & { [__brand]: B };
 
 export type ID = Brand<string, string>;
-export type TeamId = ID;
 export type PlayerId = ID;
 export type PlayerPositionId = ID;
 export type MajorEventId = ID;

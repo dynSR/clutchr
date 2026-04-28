@@ -31,15 +31,12 @@ export class TeamLogoNameComponent implements AfterViewInit {
   @Input({ required: false }) teamNameTextBlockType: TextBlockType = TextBlockType.P;
   @Input({ required: false }) gapBetweenTeamIconAndName: Spacings = Spacings.MD;
 
-  private get teamNameTextBlock(): string {
-    return `<${this.teamNameTextBlockType}>${this.team.name}</${this.teamNameTextBlockType}>`;
-  }
-
   ngAfterViewInit() {
     this.addTeamNameInHtml();
   }
 
   private addTeamNameInHtml(): void {
-    this.container.nativeElement.insertAdjacentHTML('beforeend', this.teamNameTextBlock);
+    const teamNameTextBlock = `<${this.teamNameTextBlockType}>${this.team.name}</${this.teamNameTextBlockType}>`;
+    this.container.nativeElement.insertAdjacentHTML('beforeend', teamNameTextBlock);
   }
 }

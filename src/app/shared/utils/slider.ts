@@ -36,7 +36,7 @@ export namespace SliderModule {
   export class Slider<T extends ElementRef> {
     readonly onItemSlide$ = new BehaviorSubject<number>(0);
     private range!: CircularRange;
-    private items: Array<T> = Array.of();
+    private items: Array<T> = [];
 
     get currentPosition(): number {
       return this.range.current;

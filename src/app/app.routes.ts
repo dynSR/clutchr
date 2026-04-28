@@ -6,12 +6,18 @@ import { playersRoutes } from './features/players/players.routes';
 import { articleRoutes } from './features/articles/article.routes';
 
 export const routes: Routes = [
-  ...homePageRoutes,
   {
     path: 'design-system',
     pathMatch: 'full',
     loadComponent: () => import('./features/design-system').then((m) => m.DesignSystem),
   },
+  {
+    path: 'dashboard',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./core/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+  },
+  ...homePageRoutes,
   ...articleRoutes,
   ...teamRoutes,
   ...playersRoutes,

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Match } from '../../models/match.model';
 import { DatePipe } from '@angular/common';
-import { TeamLogoNameComponent } from '../../../teams/components/shared/team-logo-name.component';
+import { TeamLogoNameComponent } from '../../../teams/components/team-logo-name/team-logo-name.component';
 import { Spacings } from '../../../../shared/enums/spacings.enum';
 
 @Component({

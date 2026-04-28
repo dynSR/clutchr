@@ -1,5 +1,5 @@
 ﻿export enum Organization {
-  BostonBreach = 'Breach',
+  Breach = 'Breach',
   Cloud9 = 'Cloud9',
   Faze = 'Faze',
   Falcons = 'Falcons',

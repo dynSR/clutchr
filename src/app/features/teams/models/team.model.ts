@@ -1,29 +1,7 @@
-﻿import {TeamId} from '../../../shared/types/branded-types';
-import {Organization} from '../../../shared/enums/organization.enum';
-import {City} from '../../../shared/enums/city.enum';
-import {Color} from '../../../shared/utils/color';
-import {PropertiesOnly} from '../../../shared/types/properties-only';
-import {BaseModel, ModelProps} from '../../../shared/utils/base-model';
-
-type TeamProps = ModelProps<TeamId> & {
-  name: string;
-  organization: Organization;
-  city: City;
-  acronym: string;
-  logoSrc: string;
-  cdlPoints: number;
-  colors: TeamColors;
-}
-
-interface TeamColors {
-  primary: Color;
-  secondary?: Color;
-}
-
-export type TeamJsonProps = Omit<
-  PropertiesOnly<TeamProps>,
-  'acronym' | 'name' | 'linkToDetails' | 'logoSrc' | 'slug'
->;
+﻿import { Organization } from '../../../shared/enums/organization.enum';
+import { City } from '../../../shared/enums/city.enum';
+import { BaseModel } from '../../../shared/utils/base-model';
+import { TeamColors, TeamId, TeamRaw, TeamProps } from '../types/team.types';
 
 export class Team extends BaseModel<TeamId> implements TeamProps {
   readonly city: City;
@@ -31,7 +9,7 @@ export class Team extends BaseModel<TeamId> implements TeamProps {
   readonly cdlPoints: number;
   readonly colors: TeamColors;
 
-  constructor(props: TeamJsonProps) {
+  constructor(props: TeamRaw) {
     super(props);
     this.city = props.city;
     this.organization = props.organization;

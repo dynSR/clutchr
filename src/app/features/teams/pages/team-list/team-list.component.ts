@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TeamService } from '../../team.service';
 import { Team } from '../../models/team.model';
-import { TeamListItemComponent } from './team-list-item.component';
+import { TeamListItemComponent } from '../../components/team-list-item/team-list-item.component';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 

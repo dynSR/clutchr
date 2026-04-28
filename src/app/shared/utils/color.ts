@@ -97,3 +97,5 @@ export class Color implements ColorProps {
     this.a = Math.max(0, Math.min(1, this.a));
   }
 }
+
+export const COLOR_WHITE: Color = Color.fromHex('#FFFFFF');

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TeamScoreboardComponent } from '../../teams/components/scoreboard/team-scoreboard.component';
+import { TeamScoreboardComponent } from '../../teams/components/team-scoreboard/team-scoreboard.component';
 import { SeasonBannerComponent } from './season-banner.component';
 import { MajorEventListComponent } from '../../major-events/components/list/major-event-list.component';
 import { ArticleListComponent } from '../../articles/components/list/article-list.component';

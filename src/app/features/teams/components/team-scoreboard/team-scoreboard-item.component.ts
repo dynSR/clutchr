@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Team } from '../../models/team.model';
-import { TeamLogoNameComponent } from '../shared/team-logo-name.component';
+import { TeamLogoNameComponent } from '../team-logo-name/team-logo-name.component';
 import { Spacings } from '../../../../shared/enums/spacings.enum';
 
 @Component({
