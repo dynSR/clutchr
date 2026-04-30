@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ConfiguredFormComponent } from '../../shared/utils/form/configured-form.component';
+import { DynamicFormComponent } from '../../shared/utils/dynamic-form/dynamic-form.component';
 import { TeamFormConfig } from '../../features/teams/types/team.types';
 
 @Component({
   selector: 'dashboard',
-  imports: [ConfiguredFormComponent],
+  imports: [DynamicFormComponent],
   template: `
-    <configured-form [config]="TeamFormConfig" />
+    <dynamic-form [fieldsConfig]="TeamFormConfig" />
   `,
 })
 export class DashboardComponent {
