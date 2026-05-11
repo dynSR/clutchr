@@ -23,10 +23,10 @@ export type TeamRaw = Omit<
   'acronym' | 'name' | 'linkToDetails' | 'logoSrc' | 'slug'
 >;
 
-export type TeamColors = {
+export interface TeamColors {
   primary: Color;
   secondary?: Color;
-};
+}
 
 export const TeamFormConfig: FormFieldsConfig = {
   fields: [

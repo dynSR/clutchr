@@ -18,7 +18,7 @@ export class Color implements ColorProps {
    * @param b - Blue component (0-255).
    * @param a - Alpha component (0-1, default: 1).
    */
-  constructor(r: number, g: number, b: number, a: number = 1) {
+  constructor(r: number, g: number, b: number, a = 1) {
     this.r = r;
     this.g = g;
     this.b = b;
@@ -72,7 +72,7 @@ export class Color implements ColorProps {
    * @param includeAlpha - Whether to include the alpha channel in the hex string (default: false).
    * @returns The hex color string (e.g., "#03ff5b" or "#03ff5bff").
    */
-  toHex(includeAlpha: boolean = false): string {
+  toHex(includeAlpha = false): string {
     const rHex = Color.colorPropToHex(this.r);
     const gHex = Color.colorPropToHex(this.g);
     const bHex = Color.colorPropToHex(this.b);

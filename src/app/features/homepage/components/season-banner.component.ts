@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LinkFlavourText } from '../../../shared/enums/link-flavour-text.enum';
 
 @Component({
-  selector: 'season-banner',
+  selector: 'app-season-banner',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
     <img src="{{ 'assets/Logo_Placeholder.png' }}" alt="CDL Logo" class="size-[60px]" />

@@ -1,4 +1,4 @@
-﻿import { Component, inject, Input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { ControlContainer, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
@@ -12,7 +12,8 @@ import {
 } from './dynamic-form.config';
 
 @Component({
-  selector: 'dynamic-form-input',
+  selector: 'app-dynamic-form-input',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, CommonModule],
   viewProviders: [
     {

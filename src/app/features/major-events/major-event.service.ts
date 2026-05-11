@@ -1,4 +1,4 @@
-﻿import {Injectable} from '@angular/core';
+﻿import { inject, Injectable} from '@angular/core';
 import {MajorEvent, MajorEventJsonProps} from './models/major-event.model';
 import {BaseService} from '../../shared/utils/base-service';
 import {AssetFileExtension, assets} from '../../shared/utils/assets-finder';
@@ -9,7 +9,7 @@ import {MajorEventMapper} from './major-event.mapper';
 export class MajorEventService extends BaseService<MajorEvent, MajorEventJsonProps> {
   protected override dataFilePath: string = assets('data/major-events', AssetFileExtension.JSON);
 
-  constructor(protected override http: HttpClient) {
-    super(http, MajorEventMapper);
+  constructor() {
+    super(inject(HttpClient), MajorEventMapper);
   }
 }

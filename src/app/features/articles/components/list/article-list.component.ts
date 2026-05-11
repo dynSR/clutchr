@@ -1,23 +1,23 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {Article} from '../../models/article.model';
-import {ArticleListItemComponent} from './article-list-item.component';
-import {ArticleService} from '../../article.service';
-import {CarouselComponent} from '../../../../shared/components/carousel/carousel.component';
-import {Observable} from 'rxjs';
-import {AsyncPipe} from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Article } from '../../models/article.model';
+import { ArticleListItemComponent } from './article-list-item.component';
+import { ArticleService } from '../../article.service';
+import { CarouselComponent } from '../../../../shared/components/carousel/carousel.component';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'article-list',
-  imports: [ArticleListItemComponent, CarouselComponent, AsyncPipe],
+  selector: 'app-article-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ArticleListItemComponent, CarouselComponent, AsyncPipe],
   template: `
     @if (articles$ | async; as articles) {
-      <carousel [items]="articles"/>
+      <app-carousel [items]="articles" />
 
       @for (article of articles; track article.id) {
-        <article-list-item [article]="article"/>
+        <app-article-list-item [article]="article" />
         @if ($index < articles.length - 1) {
-          <hr/>
+          <hr />
         }
       }
     } @else {
@@ -29,9 +29,10 @@ import {AsyncPipe} from '@angular/common';
   },
 })
 export class ArticleListComponent {
-  protected articles$: Observable<Array<Article>>;
+  protected articles$: Observable<Article[]>;
+  private readonly articleService = inject(ArticleService);
 
-  constructor(private readonly articleService: ArticleService) {
+  constructor() {
     this.articles$ = this.articleService.getAll();
   }
 }

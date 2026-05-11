@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Article } from '../../models/article.model';
 import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum';
 
 @Component({
-  selector: 'article-list-item',
+  selector: 'app-article-list-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe],
   template: `
     <header class="flex flex-col gap-md w-full">
@@ -24,7 +25,7 @@ import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum
       <section
         class="flex justify-center items-center h-[20rem] overflow-hidden rounded bg-neutral-950"
       >
-        <img src="{{ article.illustrationSrc }}" alt="{{ article.title }}"/>
+        <img src="{{ article.illustrationSrc }}" alt="{{ article.title }}" />
       </section>
     </header>
 
@@ -35,7 +36,10 @@ import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum
     </section>
 
     <!-- Link to details -->
-    <a href="{{ 'news/' + article.id + '/' + article.slug }}" class="link underline pointer-events-auto">
+    <a
+      href="{{ 'news/' + article.id + '/' + article.slug }}"
+      class="link underline pointer-events-auto"
+    >
       {{ LinkFlavourTextEnum.ReadMore }}
     </a>
   `,

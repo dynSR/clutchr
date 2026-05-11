@@ -1,10 +1,11 @@
-﻿import { Component, inject, Input } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { ControlContainer, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormConfigField } from './dynamic-form.config';
 
 @Component({
-  selector: 'dynamic-form-input-errors',
+  selector: 'app-dynamic-form-input-errors',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, CommonModule],
   viewProviders: [
     {
@@ -32,7 +33,7 @@ export class DynamicFormInputErrorsComponent {
   @Input({ required: true }) form!: FormGroup;
   @Input({ required: true }) field!: FormConfigField;
 
-  protected getErrors(controlName: string): Array<string> {
+  protected getErrors(controlName: string): string[] {
     const control = this.form.get(controlName);
     if (!control?.errors) return [];
 

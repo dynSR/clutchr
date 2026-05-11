@@ -1,32 +1,33 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TeamScoreboardComponent } from '../../teams/components/team-scoreboard/team-scoreboard.component';
 import { SeasonBannerComponent } from './season-banner.component';
 import { MajorEventListComponent } from '../../major-events/components/list/major-event-list.component';
 import { ArticleListComponent } from '../../articles/components/list/article-list.component';
-import { ScheduleComponent } from '../../matches/components/schedule/schedule.component';
+import { MatchScheduleComponent } from '../../matches/components/schedule/match-schedule.component';
 
 @Component({
-  selector: 'homepage',
+  selector: 'app-homepage',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     TeamScoreboardComponent,
     SeasonBannerComponent,
     MajorEventListComponent,
     ArticleListComponent,
-    ScheduleComponent,
+    MatchScheduleComponent,
   ],
   template: `
     <aside class="flex flex-col flex-1 h-fit gap-lg">
-      <season-banner />
-      <team-scoreboard />
-      <major-event-list />
+      <app-season-banner />
+      <app-team-scoreboard />
+      <app-major-event-list />
     </aside>
 
     <section class="flex flex-col flex-3 gap-md">
-      <article-list />
+      <app-article-list />
     </section>
 
     <aside class="flex flex-col flex-1 h-fit">
-      <schedule />
+      <app-match-schedule />
     </aside>
   `,
   host: {

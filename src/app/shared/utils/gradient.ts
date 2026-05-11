@@ -1,4 +1,4 @@
-﻿type ColorStop = { color: string; position?: number }; // position en % (0-100)
+﻿interface ColorStop { color: string; position?: number } // position en % (0-100)
 
 export class Gradient {
   private readonly direction: string;
@@ -26,7 +26,7 @@ export class Gradient {
 }
 
 export class GradientBuilder {
-  private direction: string = 'to right';
+  private direction = 'to right';
   private colorStops: ColorStop[] = [];
 
   withDirection(dir: string): this {
@@ -34,7 +34,7 @@ export class GradientBuilder {
     return this;
   }
 
-  from(color: string, position: number = 0): this {
+  from(color: string, position = 0): this {
     this.colorStops.push({ color, position });
     return this;
   }
@@ -44,7 +44,7 @@ export class GradientBuilder {
     return this;
   }
 
-  to(color: string, position: number = 100): this {
+  to(color: string, position = 100): this {
     this.colorStops.push({ color, position });
     return this;
   }

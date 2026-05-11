@@ -3,7 +3,7 @@ import {PlayerPosition} from '../../player-positions/models/player-position.mode
 import {PropertiesOnly} from '../../../shared/types/properties-only';
 import {BaseModel, ModelProps} from '../../../shared/utils/base-model';
 
-type PlayerIdentity = {
+interface PlayerIdentity {
   name: string;
   birthday: Date;
   overview: string;

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'error-serveur-500',
+  selector: 'app-error-serveur-500',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
     <p>serveur-error works!</p>

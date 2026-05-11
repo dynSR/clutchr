@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'design-system',
+  selector: 'app-design-system',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
     <section class="flex flex-col w-fit">
@@ -12,9 +13,10 @@ import {Component} from '@angular/core';
       <h5>H5 content</h5>
       <p>P content</p>
       <small>Small content</small>
-      <caption>Caption content</caption>
+      <caption>
+        Caption content
+      </caption>
     </section>
   `,
 })
-export class DesignSystem {
-}
+export class DesignSystem {}

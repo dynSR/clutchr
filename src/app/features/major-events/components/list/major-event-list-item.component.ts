@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MajorEvent } from '../../models/major-event.model';
 
 @Component({
-  selector: 'major-event-list-item',
+  selector: 'app-major-event-list-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
     <a

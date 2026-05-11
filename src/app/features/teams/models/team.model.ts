@@ -1,7 +1,7 @@
 ﻿import { Organization } from '../../../shared/enums/organization.enum';
 import { City } from '../../../shared/enums/city.enum';
 import { BaseModel } from '../../../shared/utils/base-model';
-import { TeamColors, TeamId, TeamRaw, TeamProps } from '../types/team.types';
+import { TeamColors, TeamId, TeamProps, TeamRaw } from '../types/team.types';
 
 export class Team extends BaseModel<TeamId> implements TeamProps {
   readonly city: City;

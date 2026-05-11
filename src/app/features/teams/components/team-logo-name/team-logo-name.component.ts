@@ -5,7 +5,7 @@ import { TextBlockType } from '../../../../shared/enums/text-block-type.enum';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  selector: 'team-logo-name',
+  selector: 'app-team-logo-name',
   imports: [NgOptimizedImage],
   template: `
     <section
@@ -27,7 +27,7 @@ export class TeamLogoNameComponent implements AfterViewInit {
   @ViewChild('container') container!: ElementRef<HTMLDivElement>;
   // TODO: Change the object form here to only grab the properties needed
   @Input({ required: true }) team!: Team;
-  @Input({ required: false }) teamIconSize: number = 32;
+  @Input({ required: false }) teamIconSize = 32;
   @Input({ required: false }) teamNameTextBlockType: TextBlockType = TextBlockType.P;
   @Input({ required: false }) gapBetweenTeamIconAndName: Spacings = Spacings.MD;
 

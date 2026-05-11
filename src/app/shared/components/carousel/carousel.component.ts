@@ -11,19 +11,18 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { SliderModule } from '../../utils/slider';
 import { CarouselControlsComponent } from './carousel-controls.component';
 import { CarouselIndicatorsComponent } from './carousel-indicators.component';
 import { UIPosition } from '../../enums/ui-position.enum';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Timer } from '../../utils/timer';
 import { CarouselItemProps } from '../../interfaces/carousel-item-props';
-import Slider = SliderModule.Slider;
+import { Slider } from '../../utils/slider';
 
 @Component({
-  selector: 'carousel',
-  imports: [CarouselControlsComponent, CarouselIndicatorsComponent, CarouselIndicatorsComponent],
+  selector: 'app-carousel',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CarouselControlsComponent, CarouselIndicatorsComponent, CarouselIndicatorsComponent],
   template: `
     <!-- Carousel wrapper -->
     <section role="group" class=" overflow-hidden">
@@ -48,7 +47,7 @@ import Slider = SliderModule.Slider;
       class="flex gap-xs absolute bottom-3.5 left-1/2 z-30 -translate-x-1/2 bg-neutral-900/25 rounded-2xl p-xs"
     >
       @for (_ of items; track $index) {
-        <carousel-indicators
+        <app-carousel-indicators
           [index]="$index"
           [onCarouselSlideEvent]="slider.onItemSlide$.asObservable()"
           (clickAction)="handleCarouselIndicatorsClick($event)"
@@ -57,11 +56,11 @@ import Slider = SliderModule.Slider;
     </section>
 
     <!-- Slider controls -->
-    <carousel-controls
+    <app-carousel-controls
       [position]="UIPosition.Left"
       (clickAction)="handleCarouselPreviousControlsClick()"
     />
-    <carousel-controls
+    <app-carousel-controls
       [position]="UIPosition.Right"
       (clickAction)="handleCarouselNextControlsClick()"
     />
@@ -71,8 +70,8 @@ import Slider = SliderModule.Slider;
   },
 })
 export class CarouselComponent implements AfterViewInit, OnDestroy {
-  @Input({ required: true }) items!: Array<CarouselItemProps>;
-  @Input({ required: false }) slidingDelayInSeconds: number = 5;
+  @Input({ required: true }) items!: CarouselItemProps[];
+  @Input({ required: false }) slidingDelayInSeconds = 5;
 
   @ViewChild('carouselItemsWrapper') itemWrapper!: ElementRef<HTMLUListElement>;
   @ViewChildren('carouselItem', { read: ElementRef }) itemRefs!: QueryList<

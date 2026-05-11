@@ -5,7 +5,7 @@ import {Mapper} from '../interfaces/mapper';
 import {ModelProps} from './base-model';
 
 export abstract class BaseService<T extends ModelProps<ID>, TRaw> {
-  protected cachedData: Array<T> = Array.of();
+  protected cachedData: T[] = Array.of();
   protected abstract dataFilePath: string;
 
   protected constructor(
@@ -14,7 +14,7 @@ export abstract class BaseService<T extends ModelProps<ID>, TRaw> {
   ) {
   }
 
-  getAll(): Observable<Array<T>> {
+  getAll(): Observable<T[]> {
     return new Observable((observer) => {
       if (!this.cachedData.isNullOrEmpty()) {
         observer.next(this.cachedData);
@@ -22,7 +22,7 @@ export abstract class BaseService<T extends ModelProps<ID>, TRaw> {
       }
 
       this.http
-        .get<Array<TRaw>>(this.dataFilePath)
+        .get<TRaw[]>(this.dataFilePath)
         .pipe(map((data) => data.map(this.mapper.fromJSON)))
         .subscribe((data) => {
           console.log(data);

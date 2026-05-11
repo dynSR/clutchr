@@ -1,16 +1,16 @@
-﻿import {Injectable} from '@angular/core';
-import {Match, MatchJsonProps} from './models/match.model';
-import {BaseService} from '../../shared/utils/base-service';
-import {AssetFileExtension, assets} from '../../shared/utils/assets-finder';
-import {HttpClient} from '@angular/common/http';
-import {MatchMapper} from './match.mapper';
+﻿import { inject, Injectable } from '@angular/core';
+import { Match, MatchJsonProps } from './models/match.model';
+import { BaseService } from '../../shared/utils/base-service';
+import { AssetFileExtension, assets } from '../../shared/utils/assets-finder';
+import { HttpClient } from '@angular/common/http';
+import { MatchMapper } from './match.mapper';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class MatchService extends BaseService<Match, MatchJsonProps> {
   protected override dataFilePath: string = assets('data/matches', AssetFileExtension.JSON);
 
-  constructor(protected override http: HttpClient) {
-    super(http, MatchMapper);
+  constructor() {
+    super(inject(HttpClient), MatchMapper);
   }
 
   // getIncomingMatches(): Array<Match> {

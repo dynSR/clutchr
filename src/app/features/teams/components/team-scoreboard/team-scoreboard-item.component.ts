@@ -4,7 +4,7 @@ import { TeamLogoNameComponent } from '../team-logo-name/team-logo-name.componen
 import { Spacings } from '../../../../shared/enums/spacings.enum';
 
 @Component({
-  selector: 'team-scoreboard-item',
+  selector: 'app-team-scoreboard-item',
   imports: [TeamLogoNameComponent],
   template: `
     <a
@@ -13,7 +13,7 @@ import { Spacings } from '../../../../shared/enums/spacings.enum';
     >
       <section role="group" class="flex items-center gap-lg">
         <p class="numeric">{{ position + 1 }}</p>
-        <team-logo-name
+        <app-team-logo-name
           [team]="team"
           [teamIconSize]="24"
           [gapBetweenTeamIconAndName]="Spacings.SM"

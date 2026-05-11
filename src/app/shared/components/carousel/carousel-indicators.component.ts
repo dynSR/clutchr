@@ -9,17 +9,18 @@ import {
   inject,
   Input,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'carousel-indicators',
-  imports: [],
+  selector: 'app-carousel-indicators',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [],
   template: `
-    <button #indicator
+    <button
+      #indicator
       type="button"
       class="flex items-center relative w-4 h-4 rounded cursor-pointer font-extrabold"
       (click)="onClick(index)"
@@ -57,16 +58,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   `,
 })
 export class CarouselIndicatorsComponent implements AfterViewInit {
-  @Input({ required: true }) index: number = 0;
+  @Input({ required: true }) index = 0;
   @Input({ required: true }) onCarouselSlideEvent!: Observable<number>;
   @Output() clickAction = new EventEmitter<number>();
   @ViewChild('indicator') indicator!: ElementRef<HTMLButtonElement>;
-  readonly destroyRef: DestroyRef;
   protected isIndicatedElementShown!: boolean;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    this.destroyRef = inject(DestroyRef);
-  }
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   ngAfterViewInit() {
     this.onCarouselSlideEvent.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((sliderIndex) => {

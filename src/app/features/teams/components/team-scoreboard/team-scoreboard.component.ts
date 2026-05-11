@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TeamScoreboardItemComponent } from './team-scoreboard-item.component';
 import { TeamService } from '../../team.service';
 import { Team } from '../../models/team.model';
@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'team-scoreboard',
+  selector: 'app-team-scoreboard',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TeamScoreboardItemComponent, AsyncPipe],
   template: `
     <header class="flex flex-row items-center justify-between h-[40px]">
@@ -35,7 +36,7 @@ import { AsyncPipe } from '@angular/common';
       <ul class="flex flex-col gap-xs">
         @for (team of teams; track team.id) {
           <li>
-            <team-scoreboard-item [team]="team" [position]="$index" />
+            <app-team-scoreboard-item [team]="team" [position]="$index" />
           </li>
           @if ($index < teams.length - 1) {
             <hr />
@@ -50,9 +51,10 @@ import { AsyncPipe } from '@angular/common';
 })
 export class TeamScoreboardComponent {
   protected readonly title: string = 'Standings';
-  protected teams$: Observable<Array<Team>>;
+  protected teams$: Observable<Team[]>;
+  private readonly teamService = inject(TeamService);
 
-  constructor(private readonly teamService: TeamService) {
+  constructor() {
     this.teams$ = this.teamService.getAll();
   }
 }

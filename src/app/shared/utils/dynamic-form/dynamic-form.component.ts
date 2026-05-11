@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
@@ -13,7 +13,8 @@ import { DynamicFormInputComponent } from './dynamic-form-input.component';
 import { DynamicFormInputErrorsComponent } from './dynamic-form-input-errors.component';
 
 @Component({
-  selector: 'dynamic-form',
+  selector: 'app-dynamic-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -27,14 +28,14 @@ import { DynamicFormInputErrorsComponent } from './dynamic-form-input-errors.com
           <fieldset>
             <legend>{{ field.label }}</legend>
             @for (nestedProperties of field.nestedFields; track nestedProperties.id) {
-              <dynamic-form-input [field]="nestedProperties" />
-              <dynamic-form-input-errors [form]="form" [field]="nestedProperties" />
+              <app-dynamic-form-input [field]="nestedProperties" />
+              <app-dynamic-form-input-errors [form]="form" [field]="nestedProperties" />
             }
           </fieldset>
         } @else {
           <section role="group" class="">
-            <dynamic-form-input [field]="field" />
-            <dynamic-form-input-errors [form]="form" [field]="field" />
+            <app-dynamic-form-input [field]="field" />
+            <app-dynamic-form-input-errors [form]="form" [field]="field" />
           </section>
         }
       }
@@ -61,7 +62,7 @@ export class DynamicFormComponent implements OnInit {
     }
   }
 
-  private createFormGroup(fields: Array<FormConfigField>): FormGroup {
+  private createFormGroup(fields: FormConfigField[]): FormGroup {
     const controls: Record<string, FormControl> = {};
     this.addFormControl(controls, fields);
     console.log(controls);
@@ -70,7 +71,7 @@ export class DynamicFormComponent implements OnInit {
 
   private addFormControl(
     controls: Record<string, FormControl>,
-    fields: Array<FormConfigField>,
+    fields: FormConfigField[],
   ): Record<string, FormControl> {
     fields.forEach((field) => {
       if (isGroupField(field)) {

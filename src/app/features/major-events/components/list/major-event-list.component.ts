@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
-import {MajorEvent} from '../../models/major-event.model';
-import {MajorEventListItemComponent} from './major-event-list-item.component';
-import {MajorEventService} from '../../major-event.service';
-import {Observable} from 'rxjs';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MajorEvent } from '../../models/major-event.model';
+import { MajorEventListItemComponent } from './major-event-list-item.component';
+import { MajorEventService } from '../../major-event.service';
+import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'major-event-list',
+  selector: 'app-major-event-list',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MajorEventListItemComponent, AsyncPipe],
   template: `
     <header class="h-[40px]">
@@ -16,10 +17,10 @@ import { AsyncPipe } from '@angular/common';
       <ul class="flex flex-col gap-xs">
         @for (majorEvent of majorEvents; track majorEvent.id) {
           <li>
-            <major-event-list-item [majorEvent]="majorEvent"/>
+            <app-major-event-list-item [majorEvent]="majorEvent" />
           </li>
           @if ($index < majorEvents.length - 1) {
-            <hr>
+            <hr />
           }
         }
       </ul>
@@ -30,9 +31,10 @@ import { AsyncPipe } from '@angular/common';
 })
 export class MajorEventListComponent {
   protected readonly title: string = '2026 CDL Events';
-  protected majorEvents$: Observable<Array<MajorEvent>>;
+  protected majorEvents$: Observable<MajorEvent[]>;
+  private readonly majorEventsService = inject(MajorEventService);
 
-  constructor(private readonly majorEventsService: MajorEventService) {
+  constructor() {
     this.majorEvents$ = this.majorEventsService.getAll();
   }
 }

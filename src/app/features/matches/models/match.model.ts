@@ -1,19 +1,17 @@
-﻿import {Team} from '../../teams/models/team.model';
-import {MatchId} from '../../../shared/types/branded-types';
-import {PropertiesOnly} from '../../../shared/types/properties-only';
-import {BaseModel, ModelProps} from '../../../shared/utils/base-model';
+﻿import { Team } from '../../teams/models/team.model';
+import { MatchId } from '../../../shared/types/branded-types';
+import { PropertiesOnly } from '../../../shared/types/properties-only';
+import { BaseModel, ModelProps } from '../../../shared/utils/base-model';
+import { FixedSizeArray } from '../../../shared/types/fixed-size-array';
 
 type MatchProps = ModelProps<MatchId> & {
   teams: FixedSizeArray<Team, 2>;
   score: FixedSizeArray<number, 2>;
   date: Date;
   isLive: boolean;
-}
+};
 
-export type MatchJsonProps = Omit<
-  PropertiesOnly<MatchProps>,
-  'isLive' | 'linkToDetails' | 'slug'
->;
+export type MatchJsonProps = Omit<PropertiesOnly<MatchProps>, 'isLive' | 'linkToDetails' | 'slug'>;
 
 export class Match extends BaseModel<MatchId> implements MatchProps {
   readonly teams: FixedSizeArray<Team, 2>;

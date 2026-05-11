@@ -1,8 +1,16 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
 import { UIPosition } from '../../enums/ui-position.enum';
 
 @Component({
-  selector: 'carousel-controls',
+  selector: 'app-carousel-controls',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
     <button

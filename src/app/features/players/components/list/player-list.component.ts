@@ -1,16 +1,14 @@
-import {Component} from '@angular/core';
-import {Observable} from 'rxjs';
-import {PlayersService} from '../../players.service';
-import {Player} from '../../models/player.model';
-import {AsyncPipe} from '@angular/common';
-import {PlayerListItemComponent} from './player-list-item.component';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PlayerService } from '../../player.service';
+import { Player } from '../../models/player.model';
+import { AsyncPipe } from '@angular/common';
+import { PlayerListItemComponent } from './player-list-item.component';
 
 @Component({
-  selector: 'player-list',
-  imports: [
-    AsyncPipe,
-    PlayerListItemComponent
-  ],
+  selector: 'app-player-list',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [AsyncPipe, PlayerListItemComponent],
   template: `
     <header>
       <h5>CDL 2026 Players</h5>
@@ -18,7 +16,7 @@ import {PlayerListItemComponent} from './player-list-item.component';
 
     @if (players$ | async; as players) {
       @for (player of players; track player.id) {
-        <player-list-item [player]="player"/>
+        <app-player-list-item [player]="player" />
       }
     } @else {
       <p>No player found.</p>
@@ -29,9 +27,10 @@ import {PlayerListItemComponent} from './player-list-item.component';
   },
 })
 export class PlayerListComponent {
-  protected players$: Observable<Array<Player>>;
+  protected players$: Observable<Player[]>;
+  private readonly playerService = inject(PlayerService);
 
-  constructor(private readonly playerService: PlayersService) {
+  constructor() {
     this.players$ = this.playerService.getAll();
   }
 }

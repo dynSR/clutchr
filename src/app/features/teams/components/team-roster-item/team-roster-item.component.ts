@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'team-roster-player-card',
+  selector: 'app-team-roster-player-card',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: ``,
 })

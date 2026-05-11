@@ -5,26 +5,26 @@ declare global {
     isNullOrEmpty(): boolean;
     first(): T;
     last(): T;
-    remove(item: T): Array<T>;
-    removeAt(index: number): Array<T>;
-    removeFirst(): Array<T>;
-    removeLast(): Array<T>;
+    remove(item: T): T[];
+    removeAt(index: number): T[];
+    removeFirst(): T[];
+    removeLast(): T[];
   }
 }
 
-Array.prototype.isNullOrEmpty = function <T>(this: Array<T>): boolean {
+Array.prototype.isNullOrEmpty = function <T>(this: T[]): boolean {
   return !this || this.length === 0;
 };
 
-Array.prototype.first = function <T>(this: Array<T>): T | null {
+Array.prototype.first = function <T>(this: T[]): T | null {
   return this.isNullOrEmpty() ? null : this[0];
 };
 
-Array.prototype.last = function <T>(this: Array<T>): T | null {
+Array.prototype.last = function <T>(this: T[]): T | null {
   return this.isNullOrEmpty() ? null : this[this.length - 1];
 };
 
-Array.prototype.remove = function <T>(this: Array<T>, item: T): Array<T> {
+Array.prototype.remove = function <T>(this: T[], item: T): T[] {
   if (this.isNullOrEmpty()) {
     console.error(`Tried to remove item on undefined array`);
     return [];
@@ -40,7 +40,7 @@ Array.prototype.remove = function <T>(this: Array<T>, item: T): Array<T> {
   return this;
 };
 
-Array.prototype.removeAt = function <T>(this: Array<T>, index: number): Array<T> {
+Array.prototype.removeAt = function <T>(this: T[], index: number): T[] {
   if (this.isNullOrEmpty()) {
     console.error(`Tried to remove item on undefined array`);
     return [];
@@ -60,10 +60,10 @@ Array.prototype.removeAt = function <T>(this: Array<T>, index: number): Array<T>
   return this;
 };
 
-Array.prototype.removeFirst = function <T>(this: Array<T>): Array<T> {
+Array.prototype.removeFirst = function <T>(this: T[]): T[] {
   return this.removeAt(0);
 };
 
-Array.prototype.removeLast = function <T>(this: Array<T>): Array<T> {
+Array.prototype.removeLast = function <T>(this: T[]): T[] {
   return this.removeAt(this.length - 1);
 };

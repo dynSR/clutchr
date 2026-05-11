@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Team } from '../../models/team.model';
 import { ActivatedRoute } from '@angular/router';
 import { TeamService } from '../../team.service';
@@ -10,12 +10,13 @@ import { AsyncPipe } from '@angular/common';
 import { TeamId } from '../../types/team.types';
 
 @Component({
-  selector: 'team-roster',
+  selector: 'app-team-roster',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TeamLogoNameComponent, AsyncPipe],
   template: `
     @if (team$ | async; as team) {
       <header class="flex flex-row justify-between items-center h-[80px] overflow-hidden">
-        <team-logo-name
+        <app-team-logo-name
           [team]="team"
           [teamIconSize]="80"
           [teamNameTextBlockType]="TextBlockType.H4"
@@ -51,8 +52,9 @@ export class TeamRosterComponent {
   protected team$: Observable<Team | undefined> = of(undefined);
   protected readonly TextBlockType = TextBlockType;
   private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly teamService = inject(TeamService);
 
-  constructor(private readonly teamService: TeamService) {
+  constructor() {
     const idParam = this.activatedRoute.snapshot.paramMap.get('id');
     if (idParam) {
       const teamId = createIdFrom<TeamId>(idParam);

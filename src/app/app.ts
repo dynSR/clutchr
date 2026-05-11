@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppHeaderComponent } from './core/layout/app-header.component';
 import './shared/extensions/extensions.module';
@@ -10,5 +10,6 @@ import './shared/extensions/extensions.module';
     <app-header />
     <router-outlet />
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {}

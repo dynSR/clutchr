@@ -4,9 +4,9 @@ export class Timer {
   onTimerStarted = new EventEmitter<void>();
   onTimerStopped = new EventEmitter<void>();
 
-  private currentValue: number = 0;
+  private currentValue = 0;
   private readonly isLooping: boolean;
-  private isRunning: boolean = false;
+  private isRunning = false;
   private readonly maxValue: number;
 
   private interval?: ReturnType<typeof setInterval>;

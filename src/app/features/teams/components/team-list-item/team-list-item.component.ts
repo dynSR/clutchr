@@ -1,11 +1,21 @@
-import { AfterViewInit, Component, computed, ElementRef, HostListener, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  HostListener,
+  inject,
+  Input,
+} from '@angular/core';
 import { Team } from '../../models/team.model';
 import { LinkFlavourText } from '../../../../shared/enums/link-flavour-text.enum';
 import { Color } from '../../../../shared/utils/color';
 import { Organization } from '../../../../shared/enums/organization.enum';
 
 @Component({
-  selector: 'team-list-item',
+  selector: 'app-team-list-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
     <header class="flex justify-center items-center size-[256px]">
@@ -42,14 +52,13 @@ import { Organization } from '../../../../shared/enums/organization.enum';
 export class TeamListItemComponent implements AfterViewInit {
   @Input({ required: true }) team!: Team;
   protected readonly LinkFlavorText = LinkFlavourText;
-  protected areCityOrganizationReversed = computed(() => {
+  protected readonly areCityOrganizationReversed = computed(() => {
     return [Organization.Cloud9, Organization.Faze, Organization.G2, Organization.Optic].includes(
       this.team.organization,
     );
   });
+  private readonly elementRef = inject(ElementRef);
   private readonly defaultHostBackgroundColor = new Color(44, 44, 44, 0.2);
-
-  constructor(private readonly elementRef: ElementRef) {}
 
   ngAfterViewInit() {
     this.elementRef.nativeElement.style.background = this.defaultHostBackgroundColor.toString();
